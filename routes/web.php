@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::delete('/teachers/{id}', 'TeacherController@destroy')->middleware('auth');
 
+Route::post('/sessions/sendEmails', 'SessionController@sendEmails')->middleware('auth');
+
 Route::get('/sessions/create', 'SessionController@create')->middleware('auth');
 Route::get('/teachers/create', 'TeacherController@create')->middleware('auth');
 Route::post('/sessions', 'SessionController@store')->middleware('auth');

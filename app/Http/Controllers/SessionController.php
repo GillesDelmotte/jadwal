@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\sendFirstEmail;
 use App\Session;
 use App\SessionTeacher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SessionController extends Controller
 {
@@ -50,7 +53,7 @@ class SessionController extends Controller
 
         $date = $request->date . ' ' .  '00:00';
 
-        $session->date = $date;
+        $session->date = new Carbon($date);
         $session->content = $request->content;
 
         $session->save();
@@ -120,5 +123,22 @@ class SessionController extends Controller
     public function destroy(Session $session)
     {
         //
+    }
+
+    public function sendEmails(Request $request)
+    {
+        $session = $request->session()->get('session');
+
+        foreach ($session->teachers as $teacher) {
+            $updateTeacher = $teacher->teacher;
+
+            $updateTeacher->token = time() . '$' . $session->id;
+            $updateTeacher->save();
+
+            Mail::to($updateTeacher->email)
+                ->queue(new sendFirstEmail($session, $updateTeacher));
+        }
+
+        return redirect('/home');
     }
 }

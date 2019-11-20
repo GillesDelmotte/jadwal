@@ -8,7 +8,7 @@
         {{$session->content}}
     </p>
 
-    <div>
+    <div class="mb-4">
         <h2>ajouter des profs a cette session</h2>
 
         <form action="/teachers" method="post" class="mb-4">
@@ -43,5 +43,9 @@
             @endforeach
         </ul>
     </div>
+    <form action="/sessions/sendEmails" method="post">
+        @csrf
+        <button type="submit" class="btn btn-primary">envoyer les emails</button>
+    </form>
 </div>
 @endsection

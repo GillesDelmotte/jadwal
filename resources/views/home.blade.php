@@ -11,7 +11,7 @@
                     {{$session->title}}
                 </h2>
                 <div>
-                    {{$session->date}}
+                    {{$session->date->toDateString()}}
                 </div>
             </div>
             <a href="/sessions/{{$session->id}}" class="btn btn-primary">consulter la session</a>

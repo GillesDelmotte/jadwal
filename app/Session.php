@@ -10,6 +10,8 @@ class Session extends Model
         'title', 'content', 'user_id', 'date'
     ];
 
+    protected $dates = ['created_at', 'published_at', 'updated_at', 'date'];
+
 
     public function teachers()
     {
