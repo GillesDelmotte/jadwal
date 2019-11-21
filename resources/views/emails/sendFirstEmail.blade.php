@@ -2,4 +2,4 @@
     {{$session->content}}
 </div>
 
-<a href="">remplir mon horaire</a>
+<a href="{{config('app.url')}}/sessions/fillModals/{{$teacher->token}}">remplir mon horaire</a>

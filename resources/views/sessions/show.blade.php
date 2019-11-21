@@ -11,8 +11,17 @@
         <ul class="list-group">
             @foreach($session->teachers as $teacher)
             <li class="list-group-item">
-                <div class="d-flex justify-content-between">
-                    {{$teacher->teacher->name}}
+                <div class="">
+                    <p>
+                        {{$teacher->teacher->name}}
+                    </p>
+                    <ul>
+                        @foreach($teacher->teacher->modals as $modal)
+                        <li>
+                            {{$modal->name}}
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </li>
             @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\sendFirstEmail;
 use App\Session;
 use App\SessionTeacher;
+use App\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -87,7 +88,7 @@ class SessionController extends Controller
     public function show(Session $session)
     {
 
-        $session->load('teachers.teacher');
+        $session->load('teachers.teacher.modals');
         return view('sessions.show', ['session' => $session]);
     }
 
@@ -140,5 +141,18 @@ class SessionController extends Controller
         }
 
         return redirect('/home');
+    }
+
+
+    public function fillModals(Request $request, $token)
+    {
+        $tokenParts = explode('$', $token);
+        $session_id = $tokenParts[count($tokenParts) - 1];
+        $teacher = Teacher::where('token', '=', $token)->firstOrFail();
+        $session = Session::findOrFail($session_id);
+
+        $request->session()->put('session', $session);
+
+        return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher]);
     }
 }
