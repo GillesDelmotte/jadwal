@@ -13,6 +13,17 @@
 
         <form action="/teachers" method="post" class="mb-4">
             @csrf
+            <input type="hidden" name="type" value="csv">
+            <div class="form-group">
+                <label for="file">importer un fichier CSV</label>
+                <input type="file" accept=".csv" name="file" class="form-control" id="title" placeholder="le nom et prenom du prof ici">
+            </div>
+            <button type="submit" class="btn btn-primary">importer le fichier</button>
+        </form>
+
+        <form action="/teachers" method="post" class="mb-4">
+            @csrf
+            <input type="hidden" name="type" value="form">
             <div class="form-group ">
                 <label for="name">Nom et prénom du professeur</label>
                 <input type="text" name="name" class="form-control" id="title" placeholder="le nom et prenom du prof ici">

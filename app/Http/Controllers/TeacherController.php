@@ -40,20 +40,27 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $session = $request->session()->get('session');
-        $newTeacher = Teacher::where('email', '=', $request->email)->first();
 
-        if (!$newTeacher) {
-            $newTeacher = new Teacher();
-            $newTeacher->name = $request->name;
-            $newTeacher->email = $request->email;
-            $newTeacher->save();
+        if ($request->type === 'form') {
+            $session = $request->session()->get('session');
+            $newTeacher = Teacher::where('email', '=', $request->email)->first();
+
+            if (!$newTeacher) {
+                $newTeacher = new Teacher();
+                $newTeacher->name = $request->name;
+                $newTeacher->email = $request->email;
+                $newTeacher->save();
+            }
+
+            $sessionTeacher = new SessionTeacher();
+            $sessionTeacher->teacher_id = $newTeacher->id;
+            $sessionTeacher->session_id = $session->id;
+            $sessionTeacher->save();
         }
 
-        $sessionTeacher = new SessionTeacher();
-        $sessionTeacher->teacher_id = $newTeacher->id;
-        $sessionTeacher->session_id = $session->id;
-        $sessionTeacher->save();
+        if ($request->type === 'csv') { }
+
+
         return back();
     }
 
