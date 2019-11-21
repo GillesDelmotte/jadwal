@@ -18,7 +18,7 @@
                     <ul>
                         @foreach($teacher->teacher->modals as $modal)
                         <li>
-                            {{$modal->name}}
+                            <a href="{{action('ModalController@downloadPDF', $modal->id)}}">{{$modal->name}}</a>
                         </li>
                         @endforeach
                     </ul>

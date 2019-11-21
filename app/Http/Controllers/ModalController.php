@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Modal;
 use Illuminate\Http\Request;
+use PDF;
 
 class ModalController extends Controller
 {
@@ -96,5 +97,16 @@ class ModalController extends Controller
     public function destroy(Modal $modal)
     {
         //
+    }
+
+    public function downloadPDF(Modal $modal)
+    {
+        $pdf = PDF::loadView('sessions.pdf', ['modal' => $modal]);
+
+        $modal->load('teacher');
+
+        $fileName =  str_replace(' ', '-', $modal->name) . '_' . str_replace(' ', '-', $modal->teacher->name);
+
+        return $pdf->download($fileName . '' . '.pdf');
     }
 }

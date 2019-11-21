@@ -9,4 +9,9 @@ class Modal extends Model
     protected $fillable = [
         'session_id', 'teacher_id', 'name', 'group', 'group_infos', 'local', 'supervisor'
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
 }
