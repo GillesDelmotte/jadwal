@@ -49,6 +49,12 @@ class SessionController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'title' => 'required',
+            'date' => 'required',
+            'content' => 'required'
+        ]);
+
         $session = new Session();
         $session->title = $request->title;
         $session->user_id = auth()->id();

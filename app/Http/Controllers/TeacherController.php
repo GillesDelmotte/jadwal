@@ -41,6 +41,11 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
         if ($request->type === 'form') {
             $session = $request->session()->get('session');
             $newTeacher = Teacher::where('email', '=', $request->email)->first();

@@ -21,6 +21,16 @@
             <button type="submit" class="btn btn-primary">importer le fichier</button>
         </form>
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form action="/teachers" method="post" class="mb-4">
             @csrf
             <input type="hidden" name="type" value="form">
