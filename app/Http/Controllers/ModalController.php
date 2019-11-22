@@ -36,7 +36,13 @@ class ModalController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
+        $request->validate([
+            'name' => 'required',
+            'examType' => 'required',
+            'group' => 'required',
+            'local' => 'required',
+            'supervisor' => 'required',
+        ]);
         $session = $request->session()->get('session');
 
         $modal = new Modal();

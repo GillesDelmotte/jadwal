@@ -6,6 +6,16 @@
 
     <h2>{{$session->title}}</h2>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form action="/modals" method="post">
         @csrf
         <input type="hidden" name="teacher_id" value="{{$teacher->id}}">
