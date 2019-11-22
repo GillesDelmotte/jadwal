@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Mail\sendFirstEmail;
 use App\Session;
 use App\SessionTeacher;
@@ -136,8 +137,7 @@ class SessionController extends Controller
             $updateTeacher->token = time() . '$' . $session->id;
             $updateTeacher->save();
 
-            Mail::to($updateTeacher->email)
-                ->queue(new sendFirstEmail($session, $updateTeacher));
+            dispatch(new SendEmailJob($session, $updateTeacher))->delay(Carbon::now()->addSeconds(20));
         }
 
         return redirect('/home');
