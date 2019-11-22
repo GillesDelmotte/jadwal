@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendEmail;
 use App\Mail\sendFirstEmail;
 use App\Session;
 use App\Teacher;
@@ -36,6 +37,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->teacher->email)->send(new sendFirstEmail($this->session, $this->teacher));
+        Mail::to($this->teacher->email)->send(new SendEmail($this->session, $this->teacher));
     }
 }

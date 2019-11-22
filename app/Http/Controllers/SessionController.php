@@ -92,10 +92,12 @@ class SessionController extends Controller
      * @param  \App\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function show(Session $session)
+    public function show(Session $session, Request $request)
     {
 
+
         $session->load('teachers.teacher.modals');
+        $request->session()->put('session', $session);
         return view('sessions.show', ['session' => $session]);
     }
 
@@ -135,6 +137,8 @@ class SessionController extends Controller
 
     public function sendEmails(Request $request)
     {
+
+        //return $request->session()->get('session');
         $session = $request->session()->get('session');
 
         foreach ($session->teachers as $teacher) {
@@ -143,7 +147,7 @@ class SessionController extends Controller
             $updateTeacher->token = time() . '$' . $session->id;
             $updateTeacher->save();
 
-            dispatch(new SendEmailJob($session, $updateTeacher))->delay(Carbon::now()->addSeconds(20));
+            dispatch(new SendEmailJob($session, $updateTeacher))->delay(Carbon::now()->addSeconds(5));
         }
 
         return redirect('/home');

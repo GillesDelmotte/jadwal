@@ -36,6 +36,7 @@
         <div class="form-group">
             <label for="content">Le contenu de votre mail</label>
             <textarea class="form-control" id="content" name="content" rows="6">{{$lastSession ? $lastSession->content : ''}}</textarea>
+            <small class="form-text text-muted">#titre ##sous-titre **gras** *italic* ***gras+italic*** [intitulé du lien](le lien)</small>
         </div>
         <button type="submit" class="btn btn-primary">suivant</button>
     </form>

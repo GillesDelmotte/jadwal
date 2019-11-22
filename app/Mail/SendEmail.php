@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sendFirstEmail extends Mailable implements ShouldQueue
+class SendEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     protected $session;
@@ -33,6 +33,6 @@ class sendFirstEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.sendFirstEmail', ['session' => $this->session, 'teacher' => $this->teacher]);
+        return $this->markdown('emails.send-email', ['session' => $this->session, 'teacher' => $this->teacher]);
     }
 }
