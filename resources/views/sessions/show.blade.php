@@ -15,6 +15,7 @@
                     <h3>
                         horaire(s) de {{$teacher->teacher->name}}
                     </h3>
+                    @if(count($teacher->teacher->modals) != 0)
                     <ul>
                         @foreach($teacher->teacher->modals as $modal)
                         <li>
@@ -22,6 +23,9 @@
                         </li>
                         @endforeach
                     </ul>
+                    @else
+                    <p>ce professeur n'a pas encore remplit le formulaire</p>
+                    @endif
                 </div>
                 <form action="/teachers/{{$teacher->id}}" method="post">
                     @csrf
