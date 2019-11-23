@@ -7,6 +7,7 @@ use App\Mail\sendFirstEmail;
 use App\Session;
 use App\SessionTeacher;
 use App\Teacher;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -138,8 +139,8 @@ class SessionController extends Controller
     public function sendEmails(Request $request)
     {
 
-        //return $request->session()->get('session');
         $session = $request->session()->get('session');
+        $user = User::findOrFail($session->user_id);
 
         foreach ($session->teachers as $teacher) {
             $updateTeacher = $teacher->teacher;
@@ -147,7 +148,7 @@ class SessionController extends Controller
             $updateTeacher->token = time() . '$' . $session->id;
             $updateTeacher->save();
 
-            dispatch(new SendEmailJob($session, $updateTeacher))->delay(Carbon::now()->addSeconds(5));
+            dispatch(new SendEmailJob($session, $updateTeacher, $user))->delay(Carbon::now()->addSeconds(5));
         }
 
         return redirect('/home');

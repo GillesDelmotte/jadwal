@@ -6,6 +6,7 @@ use App\Mail\SendEmail;
 use App\Mail\sendFirstEmail;
 use App\Session;
 use App\Teacher;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -18,16 +19,18 @@ class SendEmailJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $session;
     protected $teacher;
+    protected $user;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Session $session, Teacher $teacher)
+    public function __construct(Session $session, Teacher $teacher, User $user)
     {
         $this->session = $session;
         $this->teacher = $teacher;
+        $this->user = $user;
     }
 
     /**
@@ -37,6 +40,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->teacher->email)->send(new SendEmail($this->session, $this->teacher));
+        Mail::to($this->teacher->email)->send(new SendEmail($this->session, $this->teacher, $this->user));
     }
 }
