@@ -3,9 +3,11 @@
 @section('content')
 <div class="container">
     <h1>{{$session->title}}</h1>
-    <p>
-        {{$session->content}}
-    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            {!! Markdown::parse($session->content) !!}
+        </div>
+    </div>
     <div class="mb-4">
         <h2>Les professeurs concernés par cette session</h2>
         <ul class="list-group mb-3">
