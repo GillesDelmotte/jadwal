@@ -11,7 +11,7 @@
     <div class="mb-4">
         <h2>ajouter des profs a cette session</h2>
 
-        <form action="/teachers" method="post" class="mb-4">
+        <form action="/teachers" method="post" class="mb-4" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="type" value="csv">
             <div class="form-group">
