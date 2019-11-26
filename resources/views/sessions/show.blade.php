@@ -15,11 +15,11 @@
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div>
                     <h3>
-                        horaire(s) de {{$teacher->teacher->name}}
+                        horaire(s) de {{$teacher->name}}
                     </h3>
-                    @if(count($teacher->teacher->modals) != 0)
+                    @if(count($teacher->modals) != 0)
                     <ul>
-                        @foreach($teacher->teacher->modals as $modal)
+                        @foreach($teacher->modals as $modal)
                         <li>
                             <a href="{{action('ModalController@downloadPDF', $modal->id)}}">{{$modal->name}}</a>
                         </li>

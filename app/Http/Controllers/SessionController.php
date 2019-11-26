@@ -10,7 +10,10 @@ use App\Teacher;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SessionController extends Controller
 {
@@ -70,13 +73,10 @@ class SessionController extends Controller
         if ($request->lastSession) {
             $lastSession = Session::find($request->lastSession);
 
-            $lastSession->load('teachers.teacher');
+            $lastSession->load('teachers');
 
             foreach ($lastSession->teachers as $teacher) {
-                $sessionTeacher = new SessionTeacher();
-                $sessionTeacher->session_id = $session->id;
-                $sessionTeacher->teacher_id = $teacher->teacher_id;
-                $sessionTeacher->save();
+                Session::find($session->id)->teachers()->attach($teacher->id);
             }
         }
 
@@ -95,10 +95,9 @@ class SessionController extends Controller
      */
     public function show(Session $session, Request $request)
     {
-
-
-        $session->load('teachers.teacher.modals');
         $request->session()->put('session', $session);
+        $session->load('teachers.modals');
+
         return view('sessions.show', ['session' => $session]);
     }
 
@@ -142,13 +141,18 @@ class SessionController extends Controller
         $session = $request->session()->get('session');
         $user = User::findOrFail($session->user_id);
 
+        $session->load('teachers');
+
+
+
         foreach ($session->teachers as $teacher) {
-            $updateTeacher = $teacher->teacher;
 
-            $updateTeacher->token = time() . '$' . $session->id;
-            $updateTeacher->save();
+            $teacher->pivot->token = Str::random(32);
+            $teacher->pivot->save();
 
-            dispatch(new SendEmailJob($session, $updateTeacher, $user))->delay(Carbon::now()->addSeconds(5));
+            $token = $teacher->pivot->token;
+
+            dispatch(new SendEmailJob($session, $teacher, $user, $token))->delay(Carbon::now()->addSeconds(5));
         }
 
         return redirect('/home');
@@ -157,10 +161,10 @@ class SessionController extends Controller
 
     public function fillModals(Request $request, $token)
     {
-        $tokenParts = explode('$', $token);
-        $session_id = $tokenParts[count($tokenParts) - 1];
-        $teacher = Teacher::where('token', '=', $token)->firstOrFail();
-        $session = Session::findOrFail($session_id);
+        $participations = DB::table('session_teacher')->where('token', $token)->get();
+
+        $teacher = Teacher::findOrFail($participations[0]->teacher_id);
+        $session = Session::findOrFail($participations[0]->session_id);
 
         $request->session()->put('session', $session);
 

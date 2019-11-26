@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Session;
 use App\SessionTeacher;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class TeacherController extends Controller
     {
         $session = $request->session()->get('session');
 
-        $session->load('teachers.teacher');
+        $session->load('teachers');
 
         return view('teachers.create', ['session' => $session]);
     }
@@ -41,12 +42,15 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required'
-        ]);
+
 
         if ($request->type === 'form') {
+
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required'
+            ]);
+
             $session = $request->session()->get('session');
             $newTeacher = Teacher::where('email', '=', $request->email)->first();
 
@@ -57,10 +61,7 @@ class TeacherController extends Controller
                 $newTeacher->save();
             }
 
-            $sessionTeacher = new SessionTeacher();
-            $sessionTeacher->teacher_id = $newTeacher->id;
-            $sessionTeacher->session_id = $session->id;
-            $sessionTeacher->save();
+            Session::find($session->id)->teachers()->attach($newTeacher->id);
         }
 
         if ($request->type === 'csv') { }
@@ -109,10 +110,10 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SessionTeacher $sessionTeacher, $id)
+    public function destroy(Request $request, $id)
     {
-        $sessionTeacher = SessionTeacher::findorfail($id);
-        $sessionTeacher->delete();
+        $session = $request->session()->get('session');
+        Session::find($session->id)->teachers()->detach($id);
         return back();
     }
 }

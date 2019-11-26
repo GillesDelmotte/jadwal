@@ -52,7 +52,7 @@
             <li class="list-group-item">
                 <div class="d-flex justify-content-between">
                     <p>
-                        {{$teacher->teacher->name}}
+                        {{$teacher->name}}
                     </p>
                     <form action="/teachers/{{$teacher->id}}" method="POST">
                         @csrf

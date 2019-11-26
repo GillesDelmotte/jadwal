@@ -17,7 +17,6 @@ class CreateTeachersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('token')->nullable();
             $table->timestamps();
         });
     }

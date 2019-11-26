@@ -10,9 +10,4 @@ class SessionTeacher extends Model
     protected $fillable = [
         'session_id', 'teacher_id'
     ];
-
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
 }

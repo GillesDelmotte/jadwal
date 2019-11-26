@@ -15,6 +15,6 @@ class Session extends Model
 
     public function teachers()
     {
-        return $this->hasMany(SessionTeacher::class);
+        return $this->belongsToMany(Teacher::class);
     }
 }

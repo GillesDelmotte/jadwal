@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSessionTeachersTable extends Migration
+class CreateSessionTeacherTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSessionTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('session_teachers', function (Blueprint $table) {
+        Schema::create('session_teacher', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSessionTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('session_teachers');
+        Schema::dropIfExists('session_teacher');
     }
 }
