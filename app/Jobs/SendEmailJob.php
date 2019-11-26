@@ -20,17 +20,19 @@ class SendEmailJob implements ShouldQueue
     protected $session;
     protected $teacher;
     protected $user;
+    protected $token;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Session $session, Teacher $teacher, User $user)
+    public function __construct(Session $session, Teacher $teacher, User $user, $token)
     {
         $this->session = $session;
         $this->teacher = $teacher;
         $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -40,6 +42,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->teacher->email)->send(new SendEmail($this->session, $this->teacher, $this->user));
+        Mail::to($this->teacher->email)->send(new SendEmail($this->session, $this->teacher, $this->user, $this->token));
     }
 }

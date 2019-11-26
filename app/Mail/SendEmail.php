@@ -16,17 +16,19 @@ class SendEmail extends Mailable implements ShouldQueue
     protected $session;
     protected $teacher;
     protected $user;
+    protected $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Session $session, Teacher $teacher, User $user)
+    public function __construct(Session $session, Teacher $teacher, User $user, $token)
     {
         $this->session = $session;
         $this->teacher = $teacher;
         $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -38,6 +40,6 @@ class SendEmail extends Mailable implements ShouldQueue
     {
         return $this->subject('Jadwal - Modalités d‘examen - ' . $this->session->title)
             ->from($this->user->email)
-            ->markdown('emails.send-email', ['session' => $this->session, 'teacher' => $this->teacher]);
+            ->markdown('emails.send-email', ['session' => $this->session, 'teacher' => $this->teacher, 'token' => $this->token]);
     }
 }

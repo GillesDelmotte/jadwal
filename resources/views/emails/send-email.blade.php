@@ -2,6 +2,6 @@
 
 {{$session->content}}
 <br>
-[remplir mon horaire]({{config('app.url')}}/sessions/fillModals/{{$teacher->token}})
+[remplir mon horaire]({{config('app.url')}}/sessions/fillModals/{{$token}})
 
 @endcomponent
