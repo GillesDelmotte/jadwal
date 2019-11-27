@@ -21,10 +21,12 @@
                     <ul>
                         @foreach($teacher->modals as $modal)
                         <li>
-                            <a href="{{action('ModalController@downloadPDF', $modal->id)}}">{{$modal->name}}</a>
+                            <!-- <a href="{{action('ModalController@downloadPDF', $modal->id)}}">{{$modal->name}}</a> -->
+                            {{$modal->name}}
                         </li>
                         @endforeach
                     </ul>
+                    <a href="{{action('ModalController@downloadPDF', $teacher->id)}}">telecharger les modalité de {{$teacher->name}}</a>
                     @else
                     <p>ce professeur n'a pas encore remplit le formulaire</p>
                     @endif

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Modal;
+use App\Session;
+use App\Teacher;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -40,6 +42,7 @@ class ModalController extends Controller
             'name' => 'required',
             'examType' => 'required',
             'group' => 'required',
+            'duration' => 'required',
             'local' => 'required',
             'supervisor' => 'required',
         ]);
@@ -52,7 +55,9 @@ class ModalController extends Controller
         $modal->type = $request->examType;
         $modal->group = $request->group;
         $modal->group_infos = $request->groupInfos;
+        $modal->more_infos = $request->moreInfos;
         $modal->local = $request->local;
+        $modal->duration = $request->duration;
         $modal->supervisor = $request->supervisor;
 
         $modal->save();
@@ -105,14 +110,17 @@ class ModalController extends Controller
         //
     }
 
-    public function downloadPDF(Modal $modal)
+    public function downloadPDF(Teacher $teacher)
     {
-        $pdf = PDF::loadView('sessions.pdf', ['modal' => $modal]);
+        $teacher->load('modals');
+        $session = Session::findOrFail($teacher->modals[0]->session_id);
 
-        $modal->load('teacher');
+        $pdf = PDF::loadView('sessions.pdf', ['teacher' => $teacher, 'session' => $session])->setPaper('a4', 'landscape');;
 
-        $fileName =  str_replace(' ', '-', $modal->name) . '_' . str_replace(' ', '-', $modal->teacher->name);
+        $fileName =  str_replace(' ', '-', $session->title) . '_' . str_replace(' ', '-', $teacher->name);
 
-        return $pdf->download($fileName . '' . '.pdf');
+        $fileName;
+
+        return $pdf->stream($fileName . '' . '.pdf');
     }
 }

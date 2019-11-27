@@ -38,9 +38,19 @@
             <input type="text" class="form-control" id="group" name="group" placeholder="le(s) groupe(s) ici">
         </div>
         <div class="form-group">
-            <label for="groupInfos">Information supplémentaire pour les groupes</label>
+            <label for="groupInfos">Information supplémentaire sur les groupes</label>
             <textarea class="form-control" id="groupInfos" name="groupInfos" rows="6"></textarea>
             <small class="form-text text-muted">Un examen par groupe ? Un seul examen pour tous ? Tous les groupe en même temps ?</small>
+        </div>
+        <div class="form-group">
+            <label for="duration">Durée de l'examen</label>
+            <select class="form-control" id="duration" name="duration">
+                <option>1 heure</option>
+                <option>2 heures</option>
+                <option>3 heures</option>
+                <option>4 heures</option>
+                <option>La journée</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="local">Locaux possibles</label>
@@ -49,6 +59,11 @@
         <div class="form-group">
             <label for="supervisor">Surveillants souhaités</label>
             <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Le(s) surveillant(s) ici">
+        </div>
+
+        <div class="form-group">
+            <label for="moreInfos">Demandes particuliaires / indisponibilités / contraintes</label>
+            <textarea class="form-control" id="groupInfos" name="moreInfos" rows="6"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">sauvegarder ce cours</button>
     </form>

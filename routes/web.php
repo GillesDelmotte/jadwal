@@ -40,4 +40,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/sessions/fillModals/{token}', 'SessionController@fillModals');
 
 
-Route::get('/downloadPDF/{modal}', 'ModalController@downloadPDF');
+Route::get('/downloadPDF/{teacher}', 'ModalController@downloadPDF');

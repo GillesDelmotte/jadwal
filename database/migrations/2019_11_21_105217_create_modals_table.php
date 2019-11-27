@@ -21,8 +21,10 @@ class CreateModalsTable extends Migration
             $table->string('name');
             $table->string('group');
             $table->text('group_infos')->nullable();
+            $table->string('duration');
             $table->string('local');
             $table->string('supervisor');
+            $table->text('more_infos')->nullable();
             $table->timestamps();
         });
     }
