@@ -4,9 +4,11 @@
 <div class="container create">
 
     <h1>{{$session->title}}</h1>
-    <p>
-        {{$session->content}}
-    </p>
+    <div class="card mb-4">
+        <div class="card-body">
+            {!! Markdown::parse($session->content) !!}
+        </div>
+    </div>
 
     <div class="mb-4">
         <h2>ajouter des profs a cette session</h2>
