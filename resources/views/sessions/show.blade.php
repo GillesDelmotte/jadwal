@@ -21,21 +21,24 @@
                     <ul>
                         @foreach($teacher->modals as $modal)
                         <li>
-                            <!-- <a href="{{action('ModalController@downloadPDF', $modal->id)}}">{{$modal->name}}</a> -->
                             {{$modal->name}}
                         </li>
                         @endforeach
                     </ul>
-                    <a href="{{action('ModalController@downloadPDF', $teacher->id)}}">telecharger les modalité de {{$teacher->name}}</a>
                     @else
                     <p>ce professeur n'a pas encore remplit le formulaire</p>
                     @endif
                 </div>
-                <form action="/teachers/{{$teacher->id}}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">supprimer ce professeur</button>
-                </form>
+                <div>
+                    <form action="/teachers/{{$teacher->id}}" method="post" class="text-right mb-2">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">supprimer ce professeur</button>
+                    </form>
+                    @if(count($teacher->modals) != 0)
+                    <a href="{{action('ModalController@downloadPDF', $teacher->id)}}" class="btn btn-success">telecharger les modalité de {{$teacher->name}}</a>
+                    @endif
+                </div>
 
             </li>
             @endforeach

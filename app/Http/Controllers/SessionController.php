@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailJob;
 use App\Mail\sendFirstEmail;
+use App\Modal;
 use App\Session;
 use App\SessionTeacher;
 use App\Teacher;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session as PHPSession;
+
 
 class SessionController extends Controller
 {
@@ -155,6 +158,8 @@ class SessionController extends Controller
             dispatch(new SendEmailJob($session, $teacher, $user, $token))->delay(Carbon::now()->addSeconds(5));
         }
 
+        PHPSession::flash('success', 'vos emails ont bien été envoyés');
+
         return redirect('/home');
     }
 
@@ -165,9 +170,15 @@ class SessionController extends Controller
 
         $teacher = Teacher::findOrFail($participations[0]->teacher_id);
         $session = Session::findOrFail($participations[0]->session_id);
+        $modals = Modal::where('teacher_id', $teacher->id)->get();
 
         $request->session()->put('session', $session);
 
-        return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher]);
+        if ($request->from) {
+            $lastModal = Modal::findOrFail($request->from);
+            return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => $lastModal]);
+        }
+
+        return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => '']);
     }
 }

@@ -7,6 +7,8 @@ use App\Session;
 use App\Teacher;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Session as PHPSession;
+
 
 class ModalController extends Controller
 {
@@ -61,6 +63,8 @@ class ModalController extends Controller
         $modal->supervisor = $request->supervisor;
 
         $modal->save();
+
+        PHPSession::flash('success', 'votre cours a bien été enregister');
 
         return Back();
     }
