@@ -140,7 +140,11 @@ class SessionController extends Controller
      */
     public function destroy(Session $session)
     {
-        //
+        $session->teachers()->detach();
+
+        $session->delete();
+
+        return Back();
     }
 
     public function sendEmails(Request $request)
