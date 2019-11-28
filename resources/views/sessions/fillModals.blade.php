@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
     <h1>Remplir mon/mes horaire(s) - {{$session->title}}</h1>
+    @if($modals->isNotEmpty())
     <h2>Repartir d'une ancienne session</h2>
     <ul>
         @foreach($modals as $modal)
         <li><a href="{{url()->current() .'?from=' . $modal->id}}">{{$modal->name}}</a></li>
         @endforeach
     </ul>
-
-
+    @endif
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -42,20 +42,20 @@
         </div>
         <div class="form-group">
             <label for="courseName">Intitulé EXACT du cours</label>
-            <input type="text" class="form-control" id="courseName" name="name" placeholder="Le nom du cours ici" value="{{$lastModal? $lastModal->name : ''}}">
+            <input type="text" class="form-control" id="courseName" name="name" placeholder="Le nom du cours ici" value="{{old('courseName') ? old('courseName') : ($lastModal ? $lastModal->name : '')}}">
         </div>
         <div class="form-group">
             <label for="group">Groupe (Liste complète des groupe concernés)</label>
-            <input type="text" class="form-control" id="group" name="group" placeholder="le(s) groupe(s) ici" value="{{$lastModal? $lastModal->group : ''}}">
+            <input type="text" class="form-control" id="group" name="group" placeholder="le(s) groupe(s) ici" value="{{old('group') ? old('group') : ($lastModal? $lastModal->group : '')}}">
         </div>
         <div class="form-group">
             <label for="groupInfos">Information supplémentaire sur les groupes</label>
-            <textarea class="form-control" id="groupInfos" name="groupInfos" rows="6">{{$lastModal? $lastModal->group_infos : ''}}</textarea>
+            <textarea class="form-control" id="groupInfos" name="groupInfos" rows="6">{{old('group_infos') ? old('group_infos') : ($lastModal? $lastModal->group_infos : '')}}</textarea>
             <small class="form-text text-muted">Un examen par groupe ? Un seul examen pour tous ? Tous les groupe en même temps ?</small>
         </div>
         <div class="form-group">
             <label for="duration">Durée de l'examen</label>
-            <select class="form-control" id="duration" name="duration">
+            <select class="form-control" id="duration" name="duration" value="old('duration')">
                 <option>1 heure</option>
                 <option>2 heures</option>
                 <option>3 heures</option>
@@ -69,12 +69,12 @@
         </div>
         <div class="form-group">
             <label for="supervisor">Surveillants souhaités</label>
-            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Le(s) surveillant(s) ici" value="{{$lastModal? $lastModal->supervisor : ''}}">
+            <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Le(s) surveillant(s) ici" value="{{old('supervisor') ? old('supervisor') : ($lastModal? $lastModal->supervisor : '')}}">
         </div>
 
         <div class="form-group">
             <label for="moreInfos">Demandes particuliaires / indisponibilités / contraintes</label>
-            <textarea class="form-control" id="groupInfos" name="moreInfos" rows="6">{{$lastModal? $lastModal->more_infos : ''}}</textarea>
+            <textarea class="form-control" id="groupInfos" name="moreInfos" rows="6">{{old('more_infos') ? old('more_infos') : ($lastModal? $lastModal->more_infos : '')}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">sauvegarder ce cours</button>
     </form>

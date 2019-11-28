@@ -27,15 +27,15 @@
         <input type="hidden" name="lastSession" value="{{$lastSession ? $lastSession->id : ''}}">
         <div class="form-group">
             <label for="title">Titre de votre session</label>
-            <input type="text" name="title" class="form-control" id="title" placeholder="Le titre de votre session ici">
+            <input type="text" name="title" class="form-control" id="title" placeholder="Le titre de votre session ici" value="{{old('title')}}">
         </div>
         <div class="form-group">
             <label for="title">Date de l'écheance</label>
-            <input type="date" name="date" class="form-control" id="title" placeholder="Le titre de votre session ici">
+            <input type="date" name="date" class="form-control" id="title" placeholder="Le titre de votre session ici" value="{{old('date')}}">
         </div>
         <div class="form-group">
             <label for="content">Le contenu de votre mail</label>
-            <textarea class="form-control" id="content" name="content" rows="6">{{$lastSession ? $lastSession->content : ''}}</textarea>
+            <textarea class="form-control" id="content" name="content" rows="6">{{old('content') ? old('content') : ($lastSession ? $lastSession->content : '')}}</textarea>
             <small class="form-text text-muted">#titre ##sous-titre **gras** *italic* ***gras+italic*** [intitulé du lien](le lien)</small>
         </div>
         <button type="submit" class="btn btn-primary">suivant</button>
