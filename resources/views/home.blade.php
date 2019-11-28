@@ -8,6 +8,7 @@
         {{session('success')}}
     </div>
     @endif
+    @if($sessions->isNotEmpty())
     @foreach($sessions as $session)
     <div class="card mb-3">
         <div class="card-body">
@@ -31,5 +32,11 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div>
+        <p>Vous n'avez pas de session en cours</p>
+        <a href="/sessions/create" class="btn btn-primary">Creer une session</a>
+    </div>
+    @endif
 </div>
 @endsection
