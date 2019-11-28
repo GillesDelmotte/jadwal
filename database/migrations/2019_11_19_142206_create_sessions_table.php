@@ -19,6 +19,7 @@ class CreateSessionsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->timestamp('date');
+            $table->boolean('is_archive')->default(false);
             $table->timestamps();
         });
     }

@@ -124,7 +124,12 @@ class SessionController extends Controller
      */
     public function update(Request $request, Session $session)
     {
-        //
+        $session->is_archive = true;
+        $session->save();
+
+        PHPSession::flash('success', 'votre session a bien été archivé');
+
+        return Back();
     }
 
     /**

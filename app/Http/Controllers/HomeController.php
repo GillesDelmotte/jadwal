@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sessions = Session::where('user_id', auth()->id())->get();
+        $sessions = Session::where('user_id', auth()->id())->where('is_archive', '=', false)->get();
         return view('home', ["sessions" => $sessions]);
     }
 }

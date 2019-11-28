@@ -54,7 +54,12 @@
                         @else
                         <li class="nav-item">
                             <a href="/sessions/create" class="nav-link">
-                                créer une session
+                                Créer une session
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/archives" class="nav-link">
+                                Archive
                             </a>
                         </li>
                         <li class="nav-item">

@@ -30,12 +30,13 @@ Route::get('/teachers/create', 'TeacherController@create')->middleware('auth');
 Route::post('/sessions', 'SessionController@store')->middleware('auth');
 Route::post('/teachers', 'TeacherController@store')->middleware('auth');
 Route::post('/modals', 'ModalController@store');
-
+Route::put('/sessions/{session}', 'SessionController@update')->middleware('auth');
 
 Route::get('/sessions/{session}', 'SessionController@show')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/archives', 'ArchiveController@index')->middleware('auth');
 
 Route::get('/sessions/fillModals/{token}', 'SessionController@fillModals');
 

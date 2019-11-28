@@ -2,12 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">Vos sessions</h1>
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{session('success')}}
-    </div>
-    @endif
+    <h1 class="mb-4">Vos sessions archivées</h1>
     @foreach($sessions as $session)
     <div class="card mb-3">
         <div class="card-body">
@@ -17,11 +12,6 @@
             </p>
             <div class="d-flex justify-content-start">
                 <a href="/sessions/{{$session->id}}" class="btn btn-primary mr-2">Consulter la session</a>
-                <form action="/sessions/{{$session->id}}" method="post" class="mr-2">
-                    @csrf
-                    @method('PUT')
-                    <button type="submit" class="btn btn-secondary">Archiver la session</button>
-                </form>
                 <form action="/sessions/{{$session->id}}" method="post" class="mr-2">
                     @csrf
                     @method('DELETE')
