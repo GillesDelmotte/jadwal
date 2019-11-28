@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4">Vos sessions archivées</h1>
+    @if($sessions->isNotEmpty())
     @foreach($sessions as $session)
     <div class="card mb-3">
         <div class="card-body">
@@ -21,5 +22,10 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div>
+        <p>Vous n'avez pas de session archivées</p>
+    </div>
+    @endif
 </div>
 @endsection
