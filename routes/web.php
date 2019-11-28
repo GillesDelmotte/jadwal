@@ -19,26 +19,26 @@ Route::get('/', function () {
 
 
 
-Route::delete('/teachers/{id}', 'TeacherController@destroy')->middleware('auth');
-
-Route::post('/sessions/sendEmails', 'SessionController@sendEmails')->middleware('auth');
-
-
+Route::get('/home', 'HomeController@index')->middleware('auth');
 
 Route::get('/sessions/create', 'SessionController@create')->middleware('auth');
-Route::get('/teachers/create', 'TeacherController@create')->middleware('auth');
-Route::post('/sessions', 'SessionController@store')->middleware('auth');
-Route::post('/teachers', 'TeacherController@store')->middleware('auth');
-Route::post('/modals', 'ModalController@store');
-Route::put('/sessions/{session}', 'SessionController@update')->middleware('auth');
-
 Route::get('/sessions/{session}', 'SessionController@show')->middleware('auth');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/archives', 'ArchiveController@index')->middleware('auth');
-
+Route::post('/sessions', 'SessionController@store')->middleware('auth');
+Route::put('/sessions/{session}', 'SessionController@update')->middleware('auth');
+Route::delete('/sessions/{session}', 'SessionController@destroy')->middleware('auth');
+Route::post('/sessions/sendEmails', 'SessionController@sendEmails')->middleware('auth');
 Route::get('/sessions/fillModals/{token}', 'SessionController@fillModals');
 
 
+
+Route::get('/teachers/create', 'TeacherController@create')->middleware('auth');
+Route::post('/teachers', 'TeacherController@store')->middleware('auth');
+Route::delete('/teachers/{id}', 'TeacherController@destroy')->middleware('auth');
+
+Route::post('/modals', 'ModalController@store');
 Route::get('/downloadPDF/{teacher}', 'ModalController@downloadPDF');
+
+
+Route::get('/archives', 'ArchiveController@index')->middleware('auth');
+
+Auth::routes();
