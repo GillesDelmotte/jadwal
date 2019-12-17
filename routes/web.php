@@ -47,3 +47,4 @@ Route::get('/archives', 'ArchiveController@index')->middleware('auth');
 Auth::routes();
 
 Route::get('/getTeachers', 'TeacherController@teachersAPI');
+Route::post('/storeTeacher', 'TeacherController@storeTeacher');

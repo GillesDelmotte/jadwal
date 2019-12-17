@@ -66,10 +66,10 @@
                                 v-model="currentEmail"
                                 @input="choice('email')">
                         <datalist id="email">
-                            <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.email" @click="choice(teacher)">
+                            <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.email">
                         </datalist>
                     </div>
-                    <button type="submit" class="btn btn-primary" @click="addTeacher($event)">ajouter le professeur</button>
+                    <button type="submit" class="btn btn-primary" @click.prevent.stop="addTeacher()">ajouter le professeur</button>
                 </form>
             </div>
         </div>
@@ -81,7 +81,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Gestion</th>
@@ -90,7 +89,6 @@
             <tbody>
                 @foreach($session->teachers as $key => $teacher)
                 <tr>
-                    <th scope="row">{{$key + 1}}</th>
                     <td>{{$teacher->name}}</td>
                     <td>{{$teacher->email}}</td>
                     <td>
@@ -102,6 +100,17 @@
                     </td>
                 </tr>
                 @endforeach
+                <tr v-for="item in fakeList">
+                    <td>@{{item.name}}</td>
+                    <td>@{{item.email}}</td>
+                    <td>
+                        <form :action="'/teachers/' + item.id" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger mb-2">supprimer ce professeur</button>
+                        </form>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

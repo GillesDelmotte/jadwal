@@ -86,6 +86,8 @@
             <div class="title m-b-md">
                 Jadwal
             </div>
+            <p>Votre assistant d'envoi de mail et de création de session d'examen</p>
+            <a href="{{ url('/home') }}" class="btn btn-primary">commencer</a>
         </div>
     </div>
 </body>

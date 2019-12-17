@@ -39,12 +39,12 @@ class SessionController extends Controller
     public function create(Request $request)
     {
         if ($request->from) {
-            $sessions = Session::where('user_id', auth()->id())->get();
+            $sessions = Session::where('user_id', auth()->id())->where('save', true)->get();
 
             $session = Session::find($request->from);
             return view('sessions.create', ['sessions' => $sessions, 'lastSession' => $session]);
         }
-        $sessions = Session::where('user_id', auth()->id())->get();
+        $sessions = Session::where('user_id', auth()->id())->where('save', true)->get();
         return view('sessions.create', ['sessions' => $sessions, 'lastSession' => '']);
     }
 
@@ -65,6 +65,7 @@ class SessionController extends Controller
 
         $session->date = new Carbon($date);
         $session->content = $request->content;
+        $session->save = $request->save ? 1 : 0;
 
         $session->save();
 
@@ -174,7 +175,7 @@ class SessionController extends Controller
 
         $teacher = Teacher::findOrFail($participations[0]->teacher_id);
         $session = Session::findOrFail($participations[0]->session_id);
-        $modals = Modal::where('teacher_id', $teacher->id)->get();
+        $modals = Modal::where('teacher_id', $teacher->id)->where('save', true)->get();
 
         $request->session()->put('session', $session);
 

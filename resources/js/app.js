@@ -31,6 +31,7 @@ const app = new Vue({
     el: '#app',
     data: {
         teachers: [],
+        fakeList: [],
         currentTeacher: null,
         currentEmail: null,
     },
@@ -53,7 +54,15 @@ const app = new Vue({
             }
         },
         addTeacher(e) {
-            console.log('ok');
+            window.axios.post('/storeTeacher', { name: this.currentTeacher, email: this.currentEmail })
+                .then(response => {
+                    this.teachers = response.data.teachers;
+                    if (response.data.newTeacher) {
+                        this.fakeList.push(response.data.newTeacher);
+                    }
+                    this.currentEmail = '';
+                    this.currentTeacher = '';
+                })
         }
     },
     mounted() {

@@ -50,9 +50,15 @@ class CsvController extends Controller
                 $newTeacher->name = $object['nom'];
                 $newTeacher->email = $object['email'];
                 $newTeacher->save();
+                $newTeacher = Teacher::where('email', '=', $object['email'])->first();
             }
 
-            Session::find($session->id)->teachers()->attach($newTeacher->id);
+            $sessionFilter = $session->teachers->filter(function($teacher, $key) use ($newTeacher){
+                return $teacher->email === $newTeacher->email;
+            });
+            if(!$sessionFilter->first()){
+                Session::find($session->id)->teachers()->attach($newTeacher->id);
+            }
         }
 
         return back();

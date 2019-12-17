@@ -49372,6 +49372,7 @@ var app = new Vue({
   el: '#app',
   data: {
     teachers: [],
+    fakeList: [],
     currentTeacher: null,
     currentEmail: null
   },
@@ -49401,14 +49402,28 @@ var app = new Vue({
       }
     },
     addTeacher: function addTeacher(e) {
-      console.log('ok');
+      var _this2 = this;
+
+      window.axios.post('/storeTeacher', {
+        name: this.currentTeacher,
+        email: this.currentEmail
+      }).then(function (response) {
+        _this2.teachers = response.data.teachers;
+
+        if (response.data.newTeacher) {
+          _this2.fakeList.push(response.data.newTeacher);
+        }
+
+        _this2.currentEmail = '';
+        _this2.currentTeacher = '';
+      });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     window.axios.get('/getTeachers').then(function (response) {
-      _this2.teachers = response.data;
+      _this3.teachers = response.data;
     });
   }
 });

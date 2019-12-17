@@ -54,6 +54,7 @@ class ModalController extends Controller
         $modal->local = $request->local;
         $modal->duration = $request->duration;
         $modal->supervisor = $request->supervisor;
+        $modal->save = $request->save ? 1 : 0;
 
         $modal->save();
 

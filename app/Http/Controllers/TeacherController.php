@@ -54,14 +54,14 @@ class TeacherController extends Controller
             $newTeacher->save();
         }
 
-            $sessionFilter = $session->teachers->filter(function($teacher, $key) use ($newTeacher){
-                return $teacher->email === $newTeacher->email;
-            });
+        $sessionFilter = $session->teachers->filter(function($teacher, $key) use ($newTeacher){
+            return $teacher->email === $newTeacher->email;
+        });
 
 
-            if(!$sessionFilter->first()){
-                Session::find($session->id)->teachers()->attach($newTeacher->id);
-            }
+        if(!$sessionFilter->first()){
+            Session::find($session->id)->teachers()->attach($newTeacher->id);
+        }
 
 
 
@@ -118,5 +118,33 @@ class TeacherController extends Controller
     public function teachersAPI(){
         $teachers = Teacher::all();
         return $teachers;
+    }
+
+    public function storeTeacher(StoreTeacher $request){
+        $session = $request->session()->get('session');
+        //return $session;
+        $newTeacher = Teacher::where('email', '=', $request->email)->first();
+
+
+        if (!$newTeacher) {
+            $newTeacher = new Teacher();
+            $newTeacher->name = $request->name;
+            $newTeacher->email = $request->email;
+            $newTeacher->save();
+            $newTeacher = Teacher::where('email', '=', $request->email)->first();
+        }
+
+        $sessionFilter = $session->teachers->filter(function($teacher, $key) use ($newTeacher){
+            return $teacher->email === $newTeacher->email;
+        });
+
+        if(!$sessionFilter->first()){
+            $lastInsertTeacher = Session::find($session->id)->teachers()->attach($newTeacher->id);
+            $teachers = Teacher::all();
+            return ['teachers' => $teachers, 'newTeacher' =>$newTeacher];
+
+        }
+        $teachers = Teacher::all();
+        return ['teachers' => $teachers, 'newTeacher' => null];
     }
 }

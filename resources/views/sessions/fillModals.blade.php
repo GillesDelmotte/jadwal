@@ -69,6 +69,9 @@
             <textarea class="form-control" id="groupInfos" name="moreInfos" rows="6">{{old('more_infos') ? old('more_infos') : ($lastModal? $lastModal->more_infos : '')}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">sauvegarder ce cours</button>
+        <div class="form-check form-check-inline">
+            <input type="checkbox" name="save" id="save" class="ml-3 mr-2"> <label for="save">sauvegarder ma modalité</label>
+        </div>
     </form>
 
 </div>
