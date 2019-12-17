@@ -1,32 +1,24 @@
 @extends('layouts.app2')
 
 @section('content')
-<div class="container">
-    <h1>Remplir mon/mes horaire(s) - {{$session->title}}</h1>
-    @if($modals->isNotEmpty())
-    <h2>Repartir d'une ancienne session</h2>
+<div class="aside">
+    <h4>repartir d'une ancienne modalité</h4>
+    <p>
+        En repartant d'une ancienne modalité, les champs du formulaire seront pré-remplis avec les valeurs de cette modalité
+    </p>
     <ul>
         @foreach($modals as $modal)
         <li><a href="{{url()->current() .'?from=' . $modal->id}}">{{$modal->name}}</a></li>
         @endforeach
     </ul>
-    @endif
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
+</div>
+<div class="create__session">
+    <h1>Remplir mon/mes horaire(s) - {{$session->title}}</h1>
     @if(session('success'))
     <div class="alert alert-success">
         {{session('success')}}
     </div>
     @endif
-
     <form action="/modals" method="post">
         @csrf
         <input type="hidden" name="teacher_id" value="{{$teacher->id}}">

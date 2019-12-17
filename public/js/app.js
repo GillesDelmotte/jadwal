@@ -49369,7 +49369,48 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    teachers: [],
+    currentTeacher: null,
+    currentEmail: null
+  },
+  computed: {},
+  methods: {
+    choice: function choice(type) {
+      var _this = this;
+
+      if (type === 'teacher') {
+        var found = this.teachers.find(function (element) {
+          return element.name.toLowerCase() === _this.currentTeacher.toLowerCase();
+        });
+
+        if (found) {
+          this.currentEmail = found.email;
+          this.currentTeacher = found.name;
+        }
+      } else {
+        var _found = this.teachers.find(function (element) {
+          return element.email.toLowerCase() === _this.currentEmail.toLowerCase();
+        });
+
+        if (_found) {
+          this.currentEmail = _found.email;
+          this.currentTeacher = _found.name;
+        }
+      }
+    },
+    addTeacher: function addTeacher(e) {
+      console.log('ok');
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    window.axios.get('/getTeachers').then(function (response) {
+      _this2.teachers = response.data;
+    });
+  }
 });
 
 /***/ }),

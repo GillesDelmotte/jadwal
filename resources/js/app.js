@@ -29,4 +29,37 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    data: {
+        teachers: [],
+        currentTeacher: null,
+        currentEmail: null,
+    },
+    computed: {
+    },
+    methods: {
+        choice(type) {
+            if (type === 'teacher') {
+                const found = this.teachers.find(element => element.name.toLowerCase() === this.currentTeacher.toLowerCase());
+                if (found) {
+                    this.currentEmail = found.email;
+                    this.currentTeacher = found.name;
+                }
+            } else {
+                const found = this.teachers.find(element => element.email.toLowerCase() === this.currentEmail.toLowerCase());
+                if (found) {
+                    this.currentEmail = found.email;
+                    this.currentTeacher = found.name;
+                }
+            }
+        },
+        addTeacher(e) {
+            console.log('ok');
+        }
+    },
+    mounted() {
+        window.axios.get('/getTeachers')
+            .then(response => {
+                this.teachers = response.data;
+            })
+    }
 });

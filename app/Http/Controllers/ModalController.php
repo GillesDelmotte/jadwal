@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreModal;
 use App\Modal;
 use App\Session;
 use App\Teacher;
@@ -38,16 +39,8 @@ class ModalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreModal $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'examType' => 'required',
-            'group' => 'required',
-            'duration' => 'required',
-            'local' => 'required',
-            'supervisor' => 'required',
-        ]);
         $session = $request->session()->get('session');
 
         $modal = new Modal();
@@ -64,7 +57,7 @@ class ModalController extends Controller
 
         $modal->save();
 
-        PHPSession::flash('success', 'votre cours a bien été enregister');
+        PHPSession::flash('success', 'votre modalité a bien été enregisté');
 
         return Back();
     }

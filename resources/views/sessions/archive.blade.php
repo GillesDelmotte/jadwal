@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="padding-top:70px;">
     <h1 class="mb-4">Vos sessions archivées</h1>
     @if($sessions->isNotEmpty())
     @foreach($sessions as $session)
@@ -24,7 +24,7 @@
     @endforeach
     @else
     <div>
-        <p>Vous n'avez pas de session archivées</p>
+        <p>Vous n'avez pas de session archivée</p>
     </div>
     @endif
 </div>

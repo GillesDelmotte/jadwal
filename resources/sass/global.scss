@@ -2,16 +2,53 @@
     font-family: 'Lato', sans-serif;
 }
 
-.homepage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h1{
-        font-size: 70px;
-        font-weight: lighter;
-        color: grey;
-
+.aside{
+    padding: 80px 20px 0;
+    box-sizing: border-box;
+    background-color: white;
+    position: fixed;
+    height: 100vh;
+    width: 300px;
+    box-shadow: 0.125rem 0  0.25rem rgba(0, 0, 0, 0.075) !important;
+    p{
+        color: rgb(150, 150, 150);
     }
 }
 
+.create__session{
+    margin: 0 40px 20px 340px;
+    padding-top: 70px;
+}
 
+.create__teacher{
+    padding: 70px 40px 20px;
+    
+    box-sizing: border-box;
+}
+
+.navbar{
+    width: 100%;
+    z-index: 1;
+}
+
+.choice{
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 0;
+    > div{
+        flex: 1;
+        margin: 0 50px;
+    }
+}
+
+@media(max-width:850px){
+    .choice > div{
+        margin: 10px;
+    }
+}
+
+@media(max-width:700px){
+    .choice{
+        flex-direction: column;
+    }
+}

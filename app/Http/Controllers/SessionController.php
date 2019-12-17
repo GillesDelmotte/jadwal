@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSession;
 use App\Jobs\SendEmailJob;
 use App\Mail\sendFirstEmail;
 use App\Modal;
@@ -53,14 +54,8 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSession $request)
     {
-
-        $request->validate([
-            'title' => 'required',
-            'date' => 'required',
-            'content' => 'required'
-        ]);
 
         $session = new Session();
         $session->title = $request->title;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTeacher;
 use App\Session;
 use App\SessionTeacher;
 use App\Teacher;
@@ -40,77 +41,28 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTeacher $request)
     {
+        $session = $request->session()->get('session');
+        //return $session;
+        $newTeacher = Teacher::where('email', '=', $request->email)->first();
 
-        if ($request->type === 'form') {
-
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required'
-            ]);
-
-            $session = $request->session()->get('session');
-            $newTeacher = Teacher::where('email', '=', $request->email)->first();
-
-            if (!$newTeacher) {
-                $newTeacher = new Teacher();
-                $newTeacher->name = $request->name;
-                $newTeacher->email = $request->email;
-                $newTeacher->save();
-            }
-
-            Session::find($session->id)->teachers()->attach($newTeacher->id);
+        if (!$newTeacher) {
+            $newTeacher = new Teacher();
+            $newTeacher->name = $request->name;
+            $newTeacher->email = $request->email;
+            $newTeacher->save();
         }
 
-        if ($request->type === 'csv') {
-
-            $session = $request->session()->get('session');
-
-            $toto = fopen($request->file, 'r');
-
-            $row = 1;
-            $arr = [];
-
-            while (($data = fgetcsv($toto, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                $row++;
-                for ($c = 0; $c < $num; $c++) {
-                    $arr[] = $data[$c];
-                }
-            }
-            fclose($toto);
-
-            $objects = [];
-            $keys = [];
-            for ($i = 0; $i < count($arr); $i++) {
-                $val = explode(";", $arr[$i]);
-                if ($i == 0) {
-                    for ($j = 0; $j < count($val); $j++) {
-                        $keys[] = strtolower($val[$j]);
-                    }
-                } else {
-                    $objects[] = [];
-                    for ($j = 0; $j < count($val); $j++) {
-                        $objects[$i - 1][$keys[$j]] = $val[$j];
-                    }
-                }
-            }
+            $sessionFilter = $session->teachers->filter(function($teacher, $key) use ($newTeacher){
+                return $teacher->email === $newTeacher->email;
+            });
 
 
-            foreach ($objects as $object) {
-                $newTeacher = Teacher::where('email', '=', $object['email'])->first();
-
-                if (!$newTeacher) {
-                    $newTeacher = new Teacher();
-                    $newTeacher->name = $object['nom'];
-                    $newTeacher->email = $object['email'];
-                    $newTeacher->save();
-                }
-
+            if(!$sessionFilter->first()){
                 Session::find($session->id)->teachers()->attach($newTeacher->id);
             }
-        }
+
 
 
         return back();
@@ -161,5 +113,10 @@ class TeacherController extends Controller
         $session = $request->session()->get('session');
         Session::find($session->id)->teachers()->detach($id);
         return back();
+    }
+
+    public function teachersAPI(){
+        $teachers = Teacher::all();
+        return $teachers;
     }
 }

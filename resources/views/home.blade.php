@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="padding-top:70px;">
     <h1 class="mb-4">Vos sessions</h1>
     @if(session('success'))
     <div class="alert alert-success">

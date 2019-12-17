@@ -35,6 +35,9 @@ Route::get('/teachers/create', 'TeacherController@create')->middleware('auth');
 Route::post('/teachers', 'TeacherController@store')->middleware('auth');
 Route::delete('/teachers/{id}', 'TeacherController@destroy')->middleware('auth');
 
+Route::post('/csv', 'CsvController@store')->middleware('auth');
+
+
 Route::post('/modals', 'ModalController@store');
 Route::get('/downloadPDF/{teacher}', 'ModalController@downloadPDF');
 
@@ -42,3 +45,5 @@ Route::get('/downloadPDF/{teacher}', 'ModalController@downloadPDF');
 Route::get('/archives', 'ArchiveController@index')->middleware('auth');
 
 Auth::routes();
+
+Route::get('/getTeachers', 'TeacherController@teachersAPI');

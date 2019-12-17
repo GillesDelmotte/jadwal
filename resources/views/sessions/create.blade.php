@@ -1,18 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container create">
-    <h1>creation d'une nouvelle session</h1>
-    <div>
-        <h2>repartir d'une ancienne session</h2>
-        <ul>
-            @foreach($sessions as $session)
-            <li>
-                <a href="/sessions/create?from={{$session->id}}">{{$session->title}}</a>
-            </li>
-            @endforeach
-        </ul>
-    </div>
+<div class="aside">
+    <h4>repartir d'un ancien email</h4>
+    <p>
+        en repartant d'un ancien email, vous récupérez l'email et tous les destinataires
+    </p>
+    <ul>
+        @foreach($sessions as $session)
+        <li>
+            <a href="/sessions/create?from={{$session->id}}">{{$session->title}}</a>
+        </li>
+        @endforeach
+    </ul>
+</div>
+<div class="create__session">
+    <h1>création d'un nouvel email</h1>
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -30,8 +34,8 @@
             <input type="text" name="title" class="form-control" id="title" placeholder="Le titre de votre session ici" value="{{old('title')}}">
         </div>
         <div class="form-group">
-            <label for="title">Date de l'écheance</label>
-            <input type="date" name="date" class="form-control" id="title" placeholder="Le titre de votre session ici" value="{{old('date')}}">
+            <label for="date">Date de l'écheance</label>
+            <input type="date" name="date" class="form-control" id="date" value="{{old('date')}}">
         </div>
         <div class="form-group">
             <label for="content">Le contenu de votre mail</label>
