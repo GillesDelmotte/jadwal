@@ -22,7 +22,7 @@
 
 .create__teacher{
     padding: 70px 40px 20px;
-    
+
     box-sizing: border-box;
 }
 
@@ -51,4 +51,8 @@
     .choice{
         flex-direction: column;
     }
+}
+
+.fakelist{
+    display: none;
 }

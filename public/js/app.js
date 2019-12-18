@@ -49376,7 +49376,13 @@ var app = new Vue({
     currentTeacher: null,
     currentEmail: null
   },
-  computed: {},
+  computed: {
+    fakelistStyle: function fakelistStyle() {
+      return this.fakeList ? {
+        'display': 'table-row'
+      } : {};
+    }
+  },
   methods: {
     choice: function choice(type) {
       var _this = this;
@@ -49422,9 +49428,14 @@ var app = new Vue({
   mounted: function mounted() {
     var _this3 = this;
 
+    console.log(this.$refs); //this.$refs.fakelist.classList.remove('fakelist');
+
     window.axios.get('/getTeachers').then(function (response) {
       _this3.teachers = response.data;
     });
+  },
+  beforeMount: function beforeMount() {
+    document.querySelector('.fakelist').classList.remove('fakelist');
   }
 });
 

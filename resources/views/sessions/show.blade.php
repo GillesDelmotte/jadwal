@@ -50,7 +50,8 @@
                     </td>
                 </tr>
                 @endforeach
-                <tr v-for="item in fakeList">
+
+                <tr class="fakelist" v-for="item in fakeList" :style="fakelistStyle">
                     <td>@{{item.name}}</td>
                     <td>@{{item.email}}</td>
                     <td>
@@ -64,6 +65,7 @@
                         </form>
                     </td>
                 </tr>
+
             </tbody>
         </table>
         <form action="/sessions/sendEmails" method="post">

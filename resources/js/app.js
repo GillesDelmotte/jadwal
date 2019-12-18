@@ -36,6 +36,9 @@ const app = new Vue({
         currentEmail: null,
     },
     computed: {
+        fakelistStyle() {
+            return this.fakeList ? { 'display': 'table-row' } : {}
+        }
     },
     methods: {
         choice(type) {
@@ -66,9 +69,15 @@ const app = new Vue({
         }
     },
     mounted() {
+        console.log(this.$refs);
+        //this.$refs.fakelist.classList.remove('fakelist');
+
         window.axios.get('/getTeachers')
             .then(response => {
                 this.teachers = response.data;
             })
+    },
+    beforeMount() {
+        document.querySelector('.fakelist').classList.remove('fakelist');
     }
 });
