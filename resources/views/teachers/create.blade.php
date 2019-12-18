@@ -51,7 +51,7 @@
                              autocomplete="off"
                              @input="choice('teacher')">
                         <datalist id="teachers">
-                            <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.name">
+                            <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.name" >
                         </datalist>
                     </div>
                     <div class="form-group">

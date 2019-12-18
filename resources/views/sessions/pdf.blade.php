@@ -19,6 +19,12 @@
     td {
         padding: 5px 10px;
     }
+    .reco{
+        margin: 10px 0;
+    }
+    .border{
+        background-color: rgba(200, 200, 200, 0.5);
+    }
 </style>
 
 <body>
@@ -48,23 +54,21 @@
                 <td>{{$modal->local}}</td>
                 <td>{{$modal->supervisor}}</td>
             </tr>
+            <tr class="all">
+            <th scope="row"></th>
+            <td colspan="6">
+                <div class="reco">
+                    <b>recommandation pour les groupes :</b>  {{$modal->group_infos ? $modal->group_infos : '/'}}
+                </div>
+                <div class="reco">
+                    <b>Demandes particuliaires / indisponibilités / contraintes :</b> {{$modal->more_infos ? $modal->more_infos : '/'}}
+                </div>
+            </td>
+            </tr>
+            <tr class="border">
+            <td colspan="7" ></td>
+            </tr>
             @endforeach
         </tbody>
     </table>
-
-    <h2>recommandation pour les groupes</h2>
-
-    @foreach($teacher->modals as $key => $modal)
-    <p>
-        {{$key + 1}} . {{$modal->group_infos ? $modal->group_infos : '/'}}
-    </p>
-    @endforeach
-
-    <h2>Demandes particuliaires / indisponibilités / contraintes</h2>
-
-    @foreach($teacher->modals as $key => $modal)
-    <p>
-        {{$key + 1}} . {{$modal->more_infos ? $modal->more_infos : '/'}}
-    </p>
-    @endforeach
 </body>

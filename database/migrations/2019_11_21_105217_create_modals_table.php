@@ -26,6 +26,7 @@ class CreateModalsTable extends Migration
             $table->string('supervisor');
             $table->text('more_infos')->nullable();
             $table->boolean('save')->default(false);
+            $table->boolean('send')->default(false);
             $table->timestamps();
         });
     }

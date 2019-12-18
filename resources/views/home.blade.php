@@ -18,6 +18,7 @@
             </p>
             <div class="d-flex justify-content-start">
                 <a href="/sessions/{{$session->id}}" class="btn btn-primary mr-2">Consulter la session</a>
+                <a href="/sessions/create?from={{$session->id}}" class="btn btn-success mr-2">Repartir de cette session</a>
                 <form action="/sessions/{{$session->id}}" method="post" class="mr-2">
                     @csrf
                     @method('PUT')
