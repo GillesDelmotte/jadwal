@@ -43,9 +43,11 @@
             <small class="form-text text-muted">#titre ##sous-titre **gras** *italic* ***gras+italic*** [intitulé du lien](le lien)</small>
         </div>
         <button type="submit" class="btn btn-primary">suivant</button>
+         @if(count($sessions) < 10)
         <div class="form-check form-check-inline">
             <input type="checkbox" name="save" id="save" class="ml-3 mr-2"> <label for="save">sauvegarder cet email</label>
         </div>
+        @endif
     </form>
 </div>
 @endsection

@@ -1,0 +1,114 @@
+.show{
+    &__title{
+        @include title(rgba(#4fadc4, 0.5), 50px, -20px, 30px);
+    }
+    .teachers{
+        margin-top: 70px;
+        .show__title{
+            @include title(rgba(#4fadc4, 0.5), 25px, -10px, 20px);
+            margin-bottom: 20px;
+        }
+        .cards{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 15px;
+            .card{
+                position: relative;
+                background-color: rgba(150, 150, 150, 0.2);
+                //min-height: 350px;
+                padding: 30px;
+                box-sizing: border-box;
+                &__title{
+                    @include title(rgba(#4fadc4, 0.5), 20px, -10px, 15px);
+                    margin-bottom: 10px;
+                }
+                &__infos{
+                line-height: 1.4;
+                    span{
+                        font-weight: bold;
+                    }
+                }
+            }
+            .burger{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                div{
+                    display: block;
+                    width: 7px;
+                    height: 7px;
+                    background-color: $black;
+                    margin-bottom: 5px;
+                    border-radius: 50%;
+                }
+            }
+            .card__managment__label{
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 0px;
+                z-index: 1;
+            }
+
+            .card__mail{
+                margin-top: 13px;
+                color: $black;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                &::before{
+                    position: relative;
+                    top: -2px;
+                    margin-right: 6px;
+                    content:"";
+                    display: inline-block;
+                    background: url("../images/mail.svg");
+                    background-size: 100%;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .card__managment{
+                display: none;
+                justify-content: space-around;
+                flex-direction: column;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom:0;
+                left: 0;
+                background-color: $black;
+                padding: 20px;
+                padding-right: 100px;
+                a{
+                    color: white;
+                    text-decoration: none;
+
+                }
+
+                input[type="submit"]{
+                    cursor: pointer;
+                    background-color: initial;
+                    color: white;
+                    border: none;
+                    font-size: 16px;
+                    padding: 0;
+                    outline: none;
+                }
+            }
+
+            .card__managment__input:checked ~ .card__managment{
+                display: flex;
+            }
+            .card__managment__input:checked ~ label .burger div{
+                background-color: white;
+            }
+        }
+    }
+}
+

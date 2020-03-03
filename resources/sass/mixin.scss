@@ -1,0 +1,30 @@
+@mixin title($color, $fs, $top, $height){
+    font-size: $fs;
+    text-transform: uppercase;
+    letter-spacing: 2.4px;
+    display: inline-block;
+
+    &::after{
+        content:"";
+        display: block;
+        height: $height;
+        width: 70%;
+        background-color: $color;
+        position: relative;
+        top: $top;
+        z-index: -1;
+    }
+
+    a{
+        position: relative;
+        text-decoration: none;
+        color: $black;
+        transition:  0.2s;
+        left: 0;
+
+        &:hover{
+            left: 20px;
+            transition: all 0.2s;
+        }
+    }
+}

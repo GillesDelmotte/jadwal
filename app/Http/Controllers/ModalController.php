@@ -7,6 +7,7 @@ use App\Modal;
 use App\Session;
 use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Support\Facades\Session as PHPSession;
 
@@ -80,9 +81,12 @@ class ModalController extends Controller
      * @param  \App\Modal  $modal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Modal $modal)
+    public function edit(Modal $modal, $token)
     {
-        //
+        $participations = DB::table('session_teacher')->where('token', $token)->get();
+        $teacher = Teacher::findOrFail($participations[0]->teacher_id);
+
+        return view('sessions.editModal', ['modal' => $modal, 'token' => $token]);
     }
 
     /**
@@ -92,9 +96,22 @@ class ModalController extends Controller
      * @param  \App\Modal  $modal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Modal $modal)
+    public function update(StoreModal $request, Modal $modal)
     {
-        //
+        $modal->name = $request->name;
+        $modal->type = $request->examType;
+        $modal->group = $request->group;
+        $modal->group_infos = $request->groupInfos;
+        $modal->more_infos = $request->moreInfos;
+        $modal->local = $request->local;
+        $modal->duration = $request->duration;
+        $modal->supervisor = $request->supervisor;
+
+        $modal->save();
+
+        PHPSession::flash('success', 'votre modalité a bien été modifiée');
+
+        return redirect('/sessions/fillModals/' . $request->token);
     }
 
     /**
@@ -105,12 +122,13 @@ class ModalController extends Controller
      */
     public function destroy(Modal $modal)
     {
-        //
+       $modal->delete();
+        return Back();
     }
 
     public function downloadPDF(Teacher $teacher)
     {
-        $teacher->load('modals');
+        $teacher->load('modalsForTeacher');
         $session = Session::findOrFail($teacher->modals[0]->session_id);
 
         $pdf = PDF::loadView('sessions.pdf', ['teacher' => $teacher, 'session' => $session])->setPaper('a4', 'landscape');;
@@ -120,5 +138,26 @@ class ModalController extends Controller
         $fileName;
 
         return $pdf->stream($fileName . '' . '.pdf');
+    }
+
+    public function sendModals(Teacher $teacher, Session $session, Request $request ){
+        $session = $request->session()->get('session');
+
+        $session->load('teachers');
+
+        foreach($session->teachers as $teacherSession){
+            if($teacherSession->id == $teacher->id ){
+                $teacherSession->pivot->send = true;
+                $teacherSession->pivot->save();
+            }
+        }
+
+        $modals = Modal::where('teacher_id', $teacher->id)->where('session_id', $session->id)->get();
+
+        foreach($modals as $modal){
+            $modal->send = 1;
+            $modal->save();
+        }
+        return back();
     }
 }

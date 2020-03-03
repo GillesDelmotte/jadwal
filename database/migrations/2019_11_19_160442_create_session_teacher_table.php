@@ -17,6 +17,7 @@ class CreateSessionTeacherTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->boolean('send')->default(false);
             $table->string('token')->nullable();
             $table->timestamps();
         });

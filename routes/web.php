@@ -39,7 +39,11 @@ Route::post('/csv', 'CsvController@store')->middleware('auth');
 
 
 Route::post('/modals', 'ModalController@store');
+Route::put('/modals/{modal}', 'ModalController@update');
+Route::delete('/modals/{modal}', 'ModalController@destroy');
+Route::post('/sendModals/{teacher}/{session}', 'ModalController@sendModals');
 Route::get('/downloadPDF/{teacher}', 'ModalController@downloadPDF');
+Route::get('/sessions/{modal}/editModal/{token}', 'ModalController@edit');
 
 
 Route::get('/archives', 'ArchiveController@index')->middleware('auth');

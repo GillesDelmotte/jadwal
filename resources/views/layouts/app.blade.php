@@ -23,67 +23,55 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <nav class="navigation">
+            <a class="navigation__logo" href="{{ url('/home') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <div class="navigation__list">
+                <ul>
+                    <!-- Authentication Links -->
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                    @endif
+                    @else
+                    <li class="nav-item">
+                        <a href="/sessions/create" class="nav-link">
+                            Créer une session
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/archives" class="nav-link">
+                            Archive
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                            Déconnexion
+                        </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
-                        @else
-                        <li class="nav-item">
-                            <a href="/sessions/create" class="nav-link">
-                                Créer une session
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/archives" class="nav-link">
-                                Archive
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-
-                        </li>
-                        @endguest
-                    </ul>
-
-                </div>
+                    </li>
+                    @endguest
+                </ul>
             </div>
         </nav>
-
         <main class="">
             @yield('content')
         </main>
     </div>
+    <footer class="footer">
+
+    </footer>
 </body>
 
 </html>

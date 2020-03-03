@@ -1,9 +1,15 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+@import 'reset';
 
 // Variables
 @import 'variables';
+@import 'mixin';
+@import 'global';
+@import 'header';
+@import 'home';
+@import 'show';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import 'global';
+// @import '~bootstrap/scss/bootstrap';

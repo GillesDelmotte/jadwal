@@ -120,8 +120,15 @@ class SessionController extends Controller
      */
     public function update(Request $request, Session $session)
     {
+        $session->load('teachers');
         $session->is_archive = true;
         $session->save();
+
+        foreach($session->teachers as $teacher){
+            $teacher->pivot->token = null;
+            $teacher->pivot->save();
+        }
+
 
         PHPSession::flash('success', 'votre session a bien été archivé');
 
@@ -172,18 +179,32 @@ class SessionController extends Controller
     public function fillModals(Request $request, $token)
     {
         $participations = DB::table('session_teacher')->where('token', $token)->get();
-
         $teacher = Teacher::findOrFail($participations[0]->teacher_id);
         $session = Session::findOrFail($participations[0]->session_id);
         $modals = Modal::where('teacher_id', $teacher->id)->where('save', true)->get();
 
+        $session->load('teachers');
+
+        $toto = false;
+
+        foreach($session->teachers as $teacherSession){
+
+            if($teacherSession->id === $teacher->id ){
+                if( $teacherSession->pivot->send === 0){
+                    $toto = true;
+                }
+            }
+        }
+
         $request->session()->put('session', $session);
+
+        $teacher->load('modalsForTeacher');
 
         if ($request->from) {
             $lastModal = Modal::findOrFail($request->from);
-            return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => $lastModal]);
+            return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => $lastModal, 'toto' => $toto, 'token' => $token]);
         }
 
-        return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => '']);
+        return view('sessions.fillModals', ['session' => $session, 'teacher' => $teacher, 'modals' => $modals, 'lastModal' => '', 'toto' => $toto, 'token' => $token]);
     }
 }

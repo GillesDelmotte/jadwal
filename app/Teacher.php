@@ -16,6 +16,12 @@ class Teacher extends Model
             ->where('send', true);
     }
 
+    public function modalsForTeacher()
+    {
+        return $this->hasMany(Modal::class)
+            ->where('session_id', PHPSession::get('session')->id);
+    }
+
     public function sessions()
     {
         return $this->belongsToMany(Session::class);
