@@ -1,9 +1,10 @@
 .show{
+
     &__title{
         @include title(rgba(#4fadc4, 0.5), 50px, -20px, 30px);
     }
     .teachers{
-        margin-top: 70px;
+        margin: 70px 0 30px;
         .show__title{
             @include title(rgba(#4fadc4, 0.5), 25px, -10px, 20px);
             margin-bottom: 20px;
@@ -109,6 +110,17 @@
                 background-color: white;
             }
         }
+    }
+
+
+
+}
+
+.newTeacher{
+    margin-top: 70px;
+    .show__title{
+        @include title(rgba(#4fadc4, 0.5), 25px, -10px, 20px);
+        margin-bottom: 20px;
     }
 }
 

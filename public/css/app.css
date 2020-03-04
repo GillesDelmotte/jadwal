@@ -147,6 +147,40 @@ body {
   margin: 0 20px;
 }
 
+.main-title {
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.main-title::after {
+  content: "";
+  display: block;
+  height: 30px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -20px;
+  z-index: -1;
+}
+
+.main-title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.main-title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -183,6 +217,57 @@ body {
   text-decoration: none;
   font-weight: bold;
   color: #4fadc4;
+}
+
+.form__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.form__button {
+  display: block;
+  background-color: #1e1e1e;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+}
+
+.form-group {
+  position: relative;
+  border: 1px solid #1e1e1e;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  position: absolute;
+  background-color: white;
+  padding: 0 10px;
+  top: -10px;
+  left: 20px;
+}
+
+.form-group input {
+  display: block;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  width: 100%;
+}
+
+.sendButton {
+  display: block;
+  background-color: #1e1e1e;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  border: none;
 }
 
 .navigation {
@@ -423,7 +508,7 @@ body {
 }
 
 .show .teachers {
-  margin-top: 70px;
+  margin: 70px 0 30px;
 }
 
 .show .teachers .show__title {
@@ -606,5 +691,43 @@ body {
 
 .show .teachers .cards .card__managment__input:checked ~ label .burger div {
   background-color: white;
+}
+
+.newTeacher {
+  margin-top: 70px;
+}
+
+.newTeacher .show__title {
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.newTeacher .show__title::after {
+  content: "";
+  display: block;
+  height: 20px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -10px;
+  z-index: -1;
+}
+
+.newTeacher .show__title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.newTeacher .show__title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
