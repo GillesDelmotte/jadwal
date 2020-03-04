@@ -152,6 +152,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -197,6 +198,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   overflow-y: hidden;
+  margin-bottom: 50px;
 }
 
 .mail h1 {
@@ -211,12 +213,21 @@ body {
 
 .mail p {
   line-height: 1.4;
+  margin-bottom: 20px;
 }
 
 .mail a {
   text-decoration: none;
   font-weight: bold;
   color: #4fadc4;
+}
+
+.mail strong {
+  font-weight: bold;
+}
+
+.mail em {
+  font-style: italic;
 }
 
 .form__container {
@@ -259,6 +270,21 @@ body {
   width: 100%;
 }
 
+.form-group small {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  font-size: 12px;
+}
+
+.form-group textarea {
+  width: 100%;
+  border: none;
+  resize: vertical;
+  outline: none;
+  font-size: 15px;
+}
+
 .sendButton {
   display: block;
   background-color: #1e1e1e;
@@ -268,6 +294,17 @@ body {
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
   border: none;
+}
+
+.form__button-save {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.form__button-save .sendButton {
+  margin-right: 20px;
 }
 
 .navigation {
@@ -294,7 +331,7 @@ body {
 }
 
 .navigation__list ul .nav-item {
-  margin-left: 15px;
+  margin-left: 20px;
 }
 
 .navigation__list ul .nav-item a {
@@ -320,6 +357,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
 }
 
 .home__title::after {
@@ -366,6 +404,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
   margin-bottom: 10px;
 }
 
@@ -479,6 +518,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
 }
 
 .show__title::after {
@@ -516,6 +556,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -563,6 +604,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
   margin-bottom: 10px;
 }
 
@@ -702,6 +744,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2.4px;
   display: inline-block;
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -726,6 +769,227 @@ body {
 }
 
 .newTeacher .show__title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.aside {
+  background-color: rgba(150, 150, 150, 0.2);
+  width: 300px;
+  min-height: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.aside__title {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  position: relative;
+}
+
+.aside__title::after {
+  content: "";
+  display: block;
+  height: 15px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -7px;
+  z-index: -1;
+}
+
+.aside__title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.aside__title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.aside__explanation {
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.aside .list__item {
+  margin-bottom: 10px;
+}
+
+.aside .list__item a {
+  position: relative;
+  left: 0;
+  text-decoration: none;
+  color: #1e1e1e;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+.aside .list__item a::before {
+  content: "";
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  margin-right: 10px;
+  top: -1px;
+  border-radius: 50%;
+  display: block;
+  width: 7px;
+  height: 7px;
+  background-color: #1e1e1e;
+}
+
+.aside .list__item a:hover::before {
+  margin-right: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.aside__alert {
+  background-color: rgba(255, 255, 0, 0.2);
+  padding: 20px;
+  line-height: 1.3;
+}
+
+.create__session {
+  margin-left: 330px;
+}
+
+.create__session .create__title {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.create__session .create__title::after {
+  content: "";
+  display: block;
+  height: 15px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -7px;
+  z-index: -1;
+}
+
+.create__session .create__title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.create__session .create__title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+@media (max-width: 850px) {
+  .aside {
+    position: relative;
+    width: 100%;
+    min-height: initial;
+    margin-bottom: 50px;
+  }
+
+  .create__session {
+    margin-left: 0;
+  }
+}
+
+.choice {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 50px;
+}
+
+.choice__title {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.choice__title::after {
+  content: "";
+  display: block;
+  height: 15px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -7px;
+  z-index: -1;
+}
+
+.choice__title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.choice__title a:hover {
+  left: 20px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.teachers {
+  margin-top: 100px;
+}
+
+.teachers__title {
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.teachers__title::after {
+  content: "";
+  display: block;
+  height: 20px;
+  width: 70%;
+  background-color: rgba(79, 173, 196, 0.5);
+  position: relative;
+  top: -10px;
+  z-index: -1;
+}
+
+.teachers__title a {
+  position: relative;
+  text-decoration: none;
+  color: #1e1e1e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  left: 0;
+}
+
+.teachers__title a:hover {
   left: 20px;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;

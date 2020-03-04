@@ -31,6 +31,7 @@ body{
     padding: 20px;
     box-sizing: border-box;
     overflow-y: hidden ;
+    margin-bottom: 50px;
 
     h1{
         font-size: 25px;
@@ -42,12 +43,21 @@ body{
     }
     p{
         line-height: 1.4;
+        margin-bottom: 20px;
+
     }
 
     a{
         text-decoration: none;
         font-weight: bold;
         color: #4fadc4;
+    }
+
+    strong{
+        font-weight: bold;
+    }
+    em{
+        font-style: italic;
     }
 }
 
@@ -89,6 +99,19 @@ body{
             font-size: 15px;
             width: 100%;
         }
+        small{
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            font-size: 12px;
+        }
+        textarea{
+            width: 100%;
+            border:none;
+            resize: vertical;
+            outline: none;
+            font-size: 15px;
+        }
 
     }
 }
@@ -102,4 +125,12 @@ body{
     font-family: $font-family-content;
     cursor: pointer;
     border: none;
+}
+
+.form__button-save{
+    display: flex;
+    align-items: center;
+    .sendButton{
+        margin-right: 20px;
+    }
 }

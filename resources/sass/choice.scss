@@ -1,0 +1,17 @@
+.choice{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 50px;
+    &__title{
+        @include title(rgba(#4fadc4, 0.5), 15px, -7px, 15px);
+        margin-bottom: 20px;
+    }
+}
+
+.teachers{
+    margin-top: 100px;
+    &__title{
+            @include title(rgba(#4fadc4, 0.5), 25px, -10px, 20px);
+            margin-bottom: 30px;
+    }
+}
