@@ -41,7 +41,7 @@
                             name="name"
                             class="form-control"
                             id="title"
-                            placeholder="le nom et prenom du prof ici"
+                            placeholder="Annie Schmidt"
                             v-model="currentTeacher"
                             autocomplete="off"
                             @input="choice('teacher')">
@@ -56,7 +56,7 @@
                             name="email"
                             class="form-control"
                             id="title"
-                            placeholder="l'email du prof ici"
+                            placeholder="annie.schmidt@example.lu"
                             autocomplete="off"
                             v-model="currentEmail"
                             @input="choice('email')">
