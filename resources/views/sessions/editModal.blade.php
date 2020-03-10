@@ -1,8 +1,8 @@
 @extends('layouts.app2')
 
 @section('content')
-<div class="container" style='padding-top: 50px;'>
-    <h1>
+<div class="container" style=''>
+    <h1 class="main-title--second">
     Édition de "{{$modal->name}}"
     </h1>
      <form action="/modals/{{$modal->id}}" method="post">
@@ -11,22 +11,27 @@
         <input type="hidden" name="token" value="{{$token}}">
         <div class="mb-3">
             @if($modal->type == 'oral')
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="examType" id="inlineRadio1" value="oral" checked>
-                <label class="form-check-label" for="inlineRadio1">oral</label>
+            <div class="form__checkbox">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="examType" id="inlineRadio1" value="oral" checked>
+                    <label class="form-check-label" for="inlineRadio1">oral</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="examType" id="inlineRadio2" value="ecrit" >
+                    <label class="form-check-label" for="inlineRadio2">écrit</label>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="examType" id="inlineRadio2" value="ecrit" >
-                <label class="form-check-label" for="inlineRadio2">écrit</label>
-            </div>
+
             @else
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="examType" id="inlineRadio1" value="oral">
-                <label class="form-check-label" for="inlineRadio1">oral</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="examType" id="inlineRadio2" value="ecrit" checked>
-                <label class="form-check-label" for="inlineRadio2">écrit</label>
+            <div class="form__checkbox">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="examType" id="inlineRadio1" value="oral">
+                    <label class="form-check-label" for="inlineRadio1">oral</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="examType" id="inlineRadio2" value="ecrit" checked>
+                    <label class="form-check-label" for="inlineRadio2">écrit</label>
+                </div>
             </div>
             @endif
         </div>
@@ -65,8 +70,10 @@
             <label for="moreInfos">Demandes particuliaires / indisponibilités / contraintes</label>
             <textarea class="form-control" id="groupInfos" name="moreInfos" rows="6">{{$modal->more_infos}}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">mettre à jour ce cours</button>
-        <a href="/sessions/fillModals/{{$token}}" class="btn btn-danger ml-2">annuler</a>
+        <div class="form__button-save">
+            <button type="submit" class="sendButton">mettre à jour ce cours</button>
+            <a href="/sessions/fillModals/{{$token}}" class="btn btn-danger ml-2">annuler</a>
+        </div>
     </form>
 </div>
 @endsection

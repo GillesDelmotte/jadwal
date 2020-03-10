@@ -3,8 +3,16 @@
 @section('content')
 <div class="container show">
     <h1 class="show__title">{{$session->title}}</h1>
-    <div class="mail">
-        {!! Markdown::parse($session->content) !!}
+    <div class="showmail">
+        <input type="checkbox" name="showmail" id="showmail" class="sr-only showmail__checkbox">
+        <label for="showmail" class="showmail__label">
+            <span class="showmail__on">Afficher l'email</span>
+            <span class="showmail__off">Masquer l'email</span>
+            <span class="showmail__icon"></span>
+        </label>
+        <div class="mail">
+            {!! Markdown::parse($session->content) !!}
+        </div>
     </div>
     <section class="teachers">
         <h2 class="show__title">Les professeurs concernés par cette session</h2>
@@ -42,7 +50,7 @@
                 </div>
             </div>
             @endforeach
-            <div class="fakelist card" v-for="item in fakeList" :style="fakelistStyle">
+            <div class="fakelist card" v-for="item in fakeList"  :style="fakelistStyle">
                 <h3 class="card__title">@{{item.name}}</h3>
                 <div class="card__infos">
                     <p>Modalités&nbsp;: <span>ce professeur n'a pas remplit le formulaire</span>

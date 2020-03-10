@@ -28,10 +28,10 @@
                  <input type="checkbox" class="sr-only card__managment__input" id="<?= 'card__managment' . $session->id; ?>">
                  <label for="<?= 'card__managment' . $session->id; ?>" class="card__managment__label">
                         <div class="burger">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                  </label>
                 <div class="card__managment">
                     <a href="/sessions/create?from={{$session->id}}" class="">Repartir de cette session</a>

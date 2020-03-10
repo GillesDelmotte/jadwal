@@ -58,6 +58,18 @@
         @include title(rgba(#4fadc4, 0.5), 15px, -7px, 15px);
         margin-bottom: 20px;
     }
+
+    .table{
+        background-color: rgba(150, 150, 150, 0.2);
+        margin-bottom: 20px;
+        padding: 20px;
+        &__title{
+            @include title(rgba(#4fadc4, 0.5), 15px, -7px, 15px);
+            margin-bottom: 10px;
+
+        }
+
+    }
 }
 
 @media(max-width: 850px){

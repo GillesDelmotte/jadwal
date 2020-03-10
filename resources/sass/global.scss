@@ -15,6 +15,11 @@ body{
     margin-bottom: 20px;
 }
 
+.main-title--second{
+    @include title(rgba(#4fadc4, 0.5), 30px, -15px, 20px);
+    margin-bottom: 20px;
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -26,12 +31,59 @@ body{
     border: 0;
 }
 
-.mail{
+.showmail{
     background-color: rgba(150, 150, 150, 0.2);
     padding: 20px;
     box-sizing: border-box;
+    margin-bottom: 50px;
+    &__label{
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .showmail__off{
+        display: none;
+        font-weight: bold;
+    }
+    .showmail__on{
+        display: block;
+        font-weight: bold;
+
+    }
+    .showmail__icon{
+        display: block;
+        width: 15px;
+        height: 15px;
+        background: url("../images/back.svg");
+        background-size: 100%;
+
+    }
+
+    .showmail__checkbox:checked ~ label .showmail__on{
+        display: none;
+    }
+    .showmail__checkbox:checked ~ label .showmail__off{
+        display: block;
+    }
+    .showmail__checkbox:checked ~ label .showmail__icon{
+        transform: rotate(-90deg);
+    }
+    .showmail__checkbox:checked ~ .mail{
+        display: block;
+    }
+    .showmail__checkbox:checked ~ label{
+        margin-bottom: 20px;
+    }
+}
+
+.mail{
+    // background-color: rgba(150, 150, 150, 0.2);
+    // padding: 20px;
+    // box-sizing: border-box;
     overflow-y: hidden ;
     margin-bottom: 50px;
+    display: none;
 
     h1{
         font-size: 25px;
@@ -83,7 +135,7 @@ body{
         position: relative;
         border: 1px solid $black;
         padding: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
 
         label{
             position: absolute;
@@ -114,6 +166,15 @@ body{
         }
 
     }
+
+    &__checkbox{
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        .form-check{
+            margin-right: 20px;
+        }
+    }
 }
 
 .sendButton{
@@ -127,6 +188,18 @@ body{
     border: none;
 }
 
+.sendButton--link{
+    display: inline-block;
+    background-color: $black;
+    padding: 13px;
+    color: white;
+    font-size: 14px;
+    font-family: $font-family-content;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
 .form__button-save{
     display: flex;
     align-items: center;
@@ -134,6 +207,57 @@ body{
         margin-right: 20px;
     }
 }
+
+.table__content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.table__group, .table__local, .table__supervisor, .table__duration{
+    color: $black;
+    margin-right: 40px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    &::before{
+        position: relative;
+        top: -1px;
+        margin-right: 6px;
+        content:"";
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.table__group::before{
+    background: url("../images/class.svg");
+    background-size: 30px;
+
+}
+.table__local::before{
+    background: url("../images/location.svg");
+    background-size: 100%;
+
+}
+.table__duration::before{
+    background: url("../images/clock.svg");
+    background-size: 100%;
+
+}
+.table__supervisor::before{
+    background: url("../images/person.svg");
+    background-size: 100%;
+
+}
+
+.alert-success{
+    background-color: rgba(green, 0.2);
+    padding: 20px;
+    margin-bottom: 30px;
+
+}
+
 
 @media(min-width: 900px){
     .mail p{

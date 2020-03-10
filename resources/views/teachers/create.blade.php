@@ -10,14 +10,18 @@
         <div>
             <h2 class="choice__title">ajouter des destinataires via un csv</h2>
 
-            <form action="/csv" method="post" class="mb-4" enctype="multipart/form-data">
+            <form action="/csv" method="post" class="mb-4" enctype="multipart/form-data" v-on:submit.prevent="refreshPage">
                 @csrf
                 <div class="form-group">
-                    <label for="file">importer un fichier CSV</label>
-                    <input type="file" accept=".csv" name="file" class="form-control-file" id="title" placeholder="le nom et prenom du prof ici">
-                    <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
+                    <label for="file" class="">importer un fichier CSV</label>
+                    <vue-dropzone v-if="check" ref="myVueDropzone" csrf="{{ csrf_token() }}" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                    <div v-else>
+
+                        <input type="file" accept=".csv" name="file" class="" id="file" placeholder="le nom et prenom du prof ici">
+                        <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
+                    </div>
                 </div>
-                <button type="submit" class="sendButton">importer le fichier</button>
+                <button type="submit" class="sendButton" >importer le fichier</button>
             </form>
         </div>
         <div>
@@ -40,7 +44,7 @@
                             list="teachers"
                             name="name"
                             class="form-control"
-                            id="title"
+                            id="name"
                             placeholder="Annie Schmidt"
                             v-model="currentTeacher"
                             autocomplete="off"
@@ -55,7 +59,7 @@
                             list="email"
                             name="email"
                             class="form-control"
-                            id="title"
+                            id="email"
                             placeholder="annie.schmidt@example.lu"
                             autocomplete="off"
                             v-model="currentEmail"
@@ -97,7 +101,7 @@
             <div class="card" v-for="item in fakeList" :style="fakelistStyle">
                 <h3 class="card__title">@{{item.name}}</h3>
                 <div class="card__infos">
-                    <a href="mailto:@{{item.email}}" class="card__mail">@{{item.email}}</a>
+                    <a href="" class="card__mail">@{{item.email}}</a>
                 </div>
                 <input type="checkbox" class="sr-only card__managment__input" id="">
                 <label for="" class="card__managment__label">

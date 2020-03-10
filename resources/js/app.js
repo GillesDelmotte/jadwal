@@ -27,13 +27,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 const app = new Vue({
     el: '#app',
     data: {
+        check: true,
         teachers: [],
         fakeList: [],
         currentTeacher: null,
         currentEmail: null,
+        dropzoneOptions: {
+            url: '/csv',
+            thumbnailWidth: 150,
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
+        }
+    },
+    components: {
+        vueDropzone: vue2Dropzone
     },
     computed: {
         fakelistStyle() {
@@ -66,10 +78,15 @@ const app = new Vue({
                     this.currentEmail = '';
                     this.currentTeacher = '';
                 })
+        },
+        refreshPage(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            location.reload()
         }
     },
     mounted() {
-        console.log(this.$refs);
+        //console.log(csrf);
         //this.$refs.fakelist.classList.remove('fakelist');
 
         window.axios.get('/getTeachers')
@@ -78,6 +95,6 @@ const app = new Vue({
             })
     },
     beforeMount() {
-        document.querySelector('.fakelist').classList.remove('fakelist');
+        //document.querySelector('.fakelist').classList.remove('fakelist');
     }
 });
