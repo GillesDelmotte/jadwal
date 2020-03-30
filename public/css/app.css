@@ -487,6 +487,10 @@ body {
   }
 }
 
+.fakelist {
+  display: none;
+}
+
 .navigation {
   display: -webkit-box;
   display: flex;

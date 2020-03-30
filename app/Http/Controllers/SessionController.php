@@ -97,6 +97,8 @@ class SessionController extends Controller
         $request->session()->put('session', $session);
         $session->load('teachers.modals');
 
+        //return $session;
+
         return view('sessions.show', ['session' => $session]);
     }
 

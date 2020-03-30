@@ -98,7 +98,7 @@
                     </div>
                 </div>
             @endforeach
-            <div class="card" v-for="item in fakeList" :style="fakelistStyle">
+            <div class="card fakelist" v-for="item in fakeList" :style="fakelistStyle">
                 <h3 class="card__title">@{{item.name}}</h3>
                 <div class="card__infos">
                     <a href="" class="card__mail">@{{item.email}}</a>

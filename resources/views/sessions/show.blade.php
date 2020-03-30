@@ -40,8 +40,9 @@
                  </label>
                 <div class="card__managment">
                     @if(count($teacher->modals) != 0)
-                        <a href="{{action('ModalController@downloadPDF', $teacher->id)}}" class="btn btn-success">telecharger les modalité de {{$teacher->name}}</a>
+                        <a href="{{action('ModalController@downloadPDF', $teacher->id)}}" class="btn btn-success">télécharger les modalité de {{$teacher->name}}</a>
                     @endif
+                    <a href="/sessions/fillModals/<?= $teacher->pivot->token?>">Remplir les modalitées</a>
                     <form action="/teachers/{{$teacher->id}}" method="post" class="">
                         @csrf
                         @method('DELETE')
