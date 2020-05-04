@@ -63,4 +63,7 @@ class CsvController extends Controller
 
         return back();
     }
+    public function index(){
+        var_dump('ok'); die();
+    }
 }

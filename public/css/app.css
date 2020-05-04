@@ -494,8 +494,9 @@ body {
   }
 }
 
-.fakelist {
-  display: none;
+.downloadCsv {
+  display: inline-block;
+  margin-bottom: 40px;
 }
 
 .navigation {
@@ -708,6 +709,18 @@ body {
   background-color: white;
 }
 
+.home .buttonCreateSession {
+  display: inline-block;
+  background-color: #1e1e1e;
+  margin-top: 20px;
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -790,6 +803,12 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 15px;
+}
+
+.show .teachers .cards .emptyCards {
+  background-color: rgba(255, 255, 0, 0.2);
+  padding: 20px;
+  line-height: 1.5;
 }
 
 .show .teachers .cards .card {

@@ -32322,6 +32322,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-dropzone/dist/vue2Dropzone.min.css */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css");
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__);
+var _ref;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -32349,7 +32353,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 
 
-var app = new Vue({
+var app = new Vue((_ref = {
   el: '#app',
   data: {
     check: true,
@@ -32363,7 +32367,10 @@ var app = new Vue({
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
       }
-    }
+    },
+    dropzoneButton: false,
+    errorEmail: "",
+    errorTeacher: ""
   },
   components: {
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
@@ -32421,19 +32428,17 @@ var app = new Vue({
       e.stopPropagation();
       location.reload();
     }
-  },
-  mounted: function mounted() {
-    var _this3 = this;
-
-    //console.log(csrf);
-    //this.$refs.fakelist.classList.remove('fakelist');
-    window.axios.get('/getTeachers').then(function (response) {
-      _this3.teachers = response.data;
-    });
-  },
-  beforeMount: function beforeMount() {//document.querySelector('.fakelist').classList.remove('fakelist');
   }
-});
+}, _defineProperty(_ref, "computed", {}), _defineProperty(_ref, "mounted", function mounted() {
+  var _this3 = this;
+
+  //console.log(csrf);
+  //this.$refs.fakelist.classList.remove('fakelist');
+  window.axios.get('/getTeachers').then(function (response) {
+    _this3.teachers = response.data;
+  });
+}), _defineProperty(_ref, "beforeMount", function beforeMount() {//document.querySelector('.fakelist').classList.remove('fakelist');
+}), _ref));
 
 /***/ }),
 

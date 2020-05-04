@@ -51,29 +51,6 @@
                 </div>
             </div>
             @endforeach
-            <div class="fakelist card" v-for="item in fakeList"  :style="fakelistStyle">
-                <h3 class="card__title">@{{item.name}}</h3>
-                <div class="card__infos">
-                    <p>Modalités&nbsp;: <span>ce professeur n'a pas remplit le formulaire</span>
-                    </p>
-                    <a href="mailto:@{{item.email}}" class="card__mail">@{{item.email}}</a>
-                </div>
-                <input type="checkbox" class="sr-only card__managment__input" id="">
-                 <label for="" class="card__managment__label">
-                        <div class="burger">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                 </label>
-                <div class="card__managment">
-                    <form :action="'/teachers/' + item.id" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger mb-2">supprimer ce professeur</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </section>
     <form action="/sessions/sendEmails" method="post">
@@ -83,13 +60,7 @@
     <section class="newTeacher">
         <h2 class="show__title">Ajouter de nouveau professeur a cette session</h2>
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+
         @endif
         <form action="/teachers" method="post" class="form">
             @csrf
@@ -109,6 +80,11 @@
                     <datalist id="teachers">
                         <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.name">
                     </datalist>
+                    @if ($errors->has('name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Nom" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="email">Email du professeur</label>
@@ -124,9 +100,14 @@
                     <datalist id="email">
                         <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.email" @click="choice(teacher)">
                     </datalist>
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Email" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
-            <button type="submit" class="form__button" @click.prevent.stop="addTeacher()">Ajouter le professeur</button>
+            <button type="submit" class="form__button">Ajouter le professeur</button>
         </form>
     </section>
 </div>

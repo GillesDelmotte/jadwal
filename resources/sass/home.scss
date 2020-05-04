@@ -89,6 +89,18 @@
         }
 
     }
+
+    .buttonCreateSession{
+        display: inline-block;
+        background-color: $black;
+        margin-top: 20px;
+        text-decoration: none;
+        padding: 10px;
+        color: white;
+        font-size: 14px;
+        font-family: $font-family-content;
+        cursor: pointer;
+    }
 }
 
 #app{

@@ -36,6 +36,7 @@ Route::post('/teachers', 'TeacherController@store')->middleware('auth');
 Route::delete('/teachers/{id}', 'TeacherController@destroy')->middleware('auth');
 
 Route::post('/csv', 'CsvController@store')->middleware('auth');
+Route::get('/downloadCsv', 'CsvController@index')->middleware('auth');
 
 
 Route::post('/modals', 'ModalController@store');

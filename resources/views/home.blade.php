@@ -54,7 +54,7 @@
     @else
     <div>
         <p>Vous n'avez pas de session en cours</p>
-        <a href="/sessions/create" class="btn btn-primary">Creer une session</a>
+        <a href="/sessions/create" class="buttonCreateSession">Creer une session</a>
     </div>
     @endif
 </div>

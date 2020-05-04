@@ -9,33 +9,24 @@
     <section class="choice">
         <div>
             <h2 class="choice__title">ajouter des destinataires via un csv</h2>
-
+            <a href="../canvasCsv.csv" class="downloadCsv"> télécharger le fichier csv type</a>
             <form action="/csv" method="post" class="mb-4" enctype="multipart/form-data" v-on:submit.prevent="refreshPage">
                 @csrf
                 <div class="form-group">
                     <label for="file" class="">importer un fichier CSV</label>
-                    <vue-dropzone v-if="check" ref="myVueDropzone" csrf="{{ csrf_token() }}" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                    <vue-dropzone v-if="check" class="dropzone" ref="myVueDropzone" csrf="{{ csrf_token() }}" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                    <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
                     <div v-else>
 
                         <input type="file" accept=".csv" name="file" class="" id="file" placeholder="le nom et prenom du prof ici">
                         <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
                     </div>
                 </div>
-                <button type="submit" class="sendButton" >importer le fichier</button>
+                <button type="submit" class="sendButton" >Envoyer le fichier</button>
             </form>
         </div>
         <div>
             <h2 class="choice__title">ajouter des destinataires via un formulaire</h2>
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-
             <form action="/teachers" method="post" class="mb-4">
                 @csrf
                 <div class="form-group">
@@ -52,6 +43,14 @@
                     <datalist id="teachers">
                         <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.name" >
                     </datalist>
+                    <span class="invalid-feedback" role="alert">
+                        <strong></strong>
+                    </span>
+                    @if ($errors->has('name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Nom" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="email">Email du professeur</label>
@@ -67,14 +66,20 @@
                     <datalist id="email">
                         <option v-for="teacher in teachers" :key="teacher.id" :teacher="teacher" :value="teacher.email">
                     </datalist>
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Email" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
-                <button type="submit" class="sendButton" @click.prevent.stop="addTeacher()">ajouter le professeur</button>
+                <button type="submit" class="sendButton">Ajouter le professeur</button>
             </form>
         </div>
     </section>
     <section class="teachers">
         <h2 class="teachers__title">La liste des professeurs</h2>
         <div class="cards">
+            @if(count($session->teachers) !== 0)
             @foreach($session->teachers as $key => $teacher)
                 <div class="card">
                     <h3 class="card__title">{{$teacher->name}}</h3>
@@ -98,28 +103,11 @@
                     </div>
                 </div>
             @endforeach
-            <div class="card fakelist" v-for="item in fakeList" :style="fakelistStyle">
-                <h3 class="card__title">@{{item.name}}</h3>
-                <div class="card__infos">
-                    <a href="" class="card__mail">@{{item.email}}</a>
-                </div>
-                <input type="checkbox" class="sr-only card__managment__input" id="">
-                <label for="" class="card__managment__label">
-                        <div class="burger">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </label>
-                <div class="card__managment">
-                    <form :action="'/teachers/' + item.id" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger mb-2">supprimer ce professeur</button>
-                    </form>
-                </div>
-
+            @else
+            <div class="emptyCards">
+                Attention ! Vous n'avez sélectionné aucun professeur pour le moment. Si vous validez votre session maintenant, elle sera enregister mais aucun email ne sera envoyé. Cepandant, Vous pouvez toujours par la suite aller ajouter des professeurs via la page de la session.
             </div>
+            @endif
         </div>
     </section>
     <form action="/sessions/sendEmails" method="post">

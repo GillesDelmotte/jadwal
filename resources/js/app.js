@@ -42,7 +42,10 @@ const app = new Vue({
             url: '/csv',
             thumbnailWidth: 150,
             headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
-        }
+        },
+        dropzoneButton: false,
+        errorEmail: "",
+        errorTeacher: ""
     },
     components: {
         vueDropzone: vue2Dropzone
@@ -82,8 +85,10 @@ const app = new Vue({
         refreshPage(e) {
             e.preventDefault();
             e.stopPropagation();
-            location.reload()
+            location.reload();
         }
+    },
+    computed: {
     },
     mounted() {
         //console.log(csrf);

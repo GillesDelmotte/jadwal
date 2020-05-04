@@ -17,7 +17,7 @@
             @endforeach
         </ul>
         @else
-            <p class="aside__alert">Vous n'avez pas encore enregistrer de mail</p>
+            <p class="aside__alert">Vous n'avez pas encore enregistré de mail</p>
         @endif
     </div>
     <div class="create__session">
