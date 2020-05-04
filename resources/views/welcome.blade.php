@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -12,82 +13,76 @@
 
     <!-- Styles -->
     <style>
-        html,
-        body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
 
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
+        .content{
             display: flex;
             justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 150px;
         }
-
-        .position-ref {
-            position: relative;
+        .welcome__title{
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 100px;
+            color: rgb(30, 30, 30);
         }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
+        .welcome__content{
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
             text-align: center;
         }
-
-        .title {
-            font-size: 84px;
+        .nav{
+            text-align: right;
+            padding: 20px;
         }
+        .welcome__link{
+                font-family: 'Montserrat', sans-serif;
+                text-decoration: none;
+                color: rgb(30, 30, 30);
+                margin-left: 20px;
 
-        .links>a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
+        }
+        .welcome__link:hover{
+            color: grey;
+        }
+        .welcome__button{
+            display: block;
+            background-color: rgb(30, 30, 30);
+            margin-top: 15px;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
             text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
+            cursor: pointer;
+            border: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
+    <div class="">
         @if (Route::has('login'))
-        <div class="top-right links">
+        <div class="nav">
             @auth
-            <a href="{{ url('/home') }}">Accueil</a>
+            <a href="{{ url('/home') }}" class="welcome__link">Accueil</a>
             @else
-            <a href="{{ route('login') }}">Connexion</a>
+            <a href="{{ route('login') }}" class="welcome__link">Connexion</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}">Inscription</a>
+            <a href="{{ route('register') }}" class="welcome__link">Inscription</a>
             @endif
             @endauth
         </div>
         @endif
 
         <div class="content">
-            <div class="title m-b-md">
+            <div class="welcome__title">
                 Jadwal
             </div>
-            <p>Votre assistant d'envoi de mail et de création de session d'examen</p>
-            <a href="{{ url('/home') }}" class="btn btn-primary">commencer</a>
+            <p class="welcome__content">Votre assistant d'envoi de mail et de création de session d'examen</p>
+            <a href="{{ url('/home') }}" class="welcome__button">commencer</a>
         </div>
     </div>
 </body>

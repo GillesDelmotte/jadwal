@@ -136,6 +136,12 @@ body{
         border: 1px solid $black;
         padding: 10px;
         margin-bottom: 40px;
+        .invalid-feedback{
+            position: absolute;
+            left: 0;
+            top: calc( 100% + 10px);
+            color: red;
+        }
 
         label{
             position: absolute;
