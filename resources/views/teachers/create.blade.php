@@ -14,15 +14,16 @@
                 @csrf
                 <div class="form-group">
                     <label for="file" class="">importer un fichier CSV</label>
-                    <vue-dropzone v-if="check" class="dropzone" ref="myVueDropzone" csrf="{{ csrf_token() }}" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                    <div v-if="check">
+                    <vue-dropzone  class="dropzone" ref="myVueDropzone" csrf="{{ csrf_token() }}" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
                     <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
+                    </div>
                     <div v-else>
-
                         <input type="file" accept=".csv" name="file" class="" id="file" placeholder="le nom et prenom du prof ici">
                         <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
                     </div>
                 </div>
-                <button type="submit" class="sendButton" >Envoyer le fichier</button>
+                <button v-if="!check" type="submit" class="sendButton" >Envoyer le fichier</button>
             </form>
         </div>
         <div>

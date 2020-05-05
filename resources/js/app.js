@@ -41,7 +41,13 @@ const app = new Vue({
         dropzoneOptions: {
             url: '/csv',
             thumbnailWidth: 150,
-            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
+            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+            acceptedFiles: "text/csv",
+            init: function () {
+                this.on('complete', function () {
+                    location.reload();
+                });
+            }
         },
         dropzoneButton: false,
         errorEmail: "",
@@ -81,11 +87,6 @@ const app = new Vue({
                     this.currentEmail = '';
                     this.currentTeacher = '';
                 })
-        },
-        refreshPage(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            location.reload();
         }
     },
     computed: {

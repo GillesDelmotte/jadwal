@@ -6,8 +6,8 @@
     <div class="showmail">
         <input type="checkbox" name="showmail" id="showmail" class="sr-only showmail__checkbox">
         <label for="showmail" class="showmail__label">
-            <span class="showmail__on">Afficher l'email</span>
-            <span class="showmail__off">Masquer l'email</span>
+            <span class="showmail__on">Afficher l'email de la session</span>
+            <span class="showmail__off">Masquer l'email de la session</span>
             <span class="showmail__icon"></span>
         </label>
         <div class="mail">
@@ -16,7 +16,9 @@
     </div>
     <section class="teachers">
         <h2 class="show__title">Les professeurs concernés par cette session</h2>
+
         <div class="cards">
+            @if(count($session->teachers) !== 0)
             @foreach($session->teachers as $key => $teacher)
             <div class="card">
                 <h3 class="card__title">{{$teacher->name}}</h3>
@@ -42,7 +44,7 @@
                     @if(count($teacher->modals) != 0)
                         <a href="{{action('ModalController@downloadPDF', $teacher->id)}}" class="btn btn-success">télécharger les modalité de {{$teacher->name}}</a>
                     @endif
-                    <a href="/sessions/fillModals/<?= $teacher->pivot->token?>">Remplir les modalitées</a>
+                    <a href="/sessions/fillModals/<?= $teacher->pivot->token?>" target="_blank">Remplir les modalitées</a>
                     <form action="/teachers/{{$teacher->id}}" method="post" class="">
                         @csrf
                         @method('DELETE')
@@ -51,12 +53,19 @@
                 </div>
             </div>
             @endforeach
+            @else
+            <div class="emptyCards">
+                Vous n'avez ajouté aucun professeur a cette session. vous pouvez en ajouer via le formulaire ci-dessous. Quand vous avez terminer d'ajouter les professeur, n'oublier pas d'appuyer sur le bouton "envoyer les emails aux professeurs"
+            </div>
+            @endif
         </div>
     </section>
+    @if(count($session->teachers) !== 0)
     <form action="/sessions/sendEmails" method="post">
         @csrf
-        <button type="submit" class="sendButton">Renvoyer les emails aux professeurs qui n'ont pas remplits leur formulaire</button>
+        <button type="submit" class="sendButton">Renvoyer les emails aux professeurs</button>
     </form>
+    @endif
     <section class="newTeacher">
         <h2 class="show__title">Ajouter de nouveau professeur a cette session</h2>
         @if ($errors->any())

@@ -32366,6 +32366,12 @@ var app = new Vue((_ref = {
       thumbnailWidth: 150,
       headers: {
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+      },
+      acceptedFiles: "text/csv",
+      init: function init() {
+        this.on('complete', function () {
+          location.reload();
+        });
       }
     },
     dropzoneButton: false,
@@ -32422,11 +32428,6 @@ var app = new Vue((_ref = {
         _this2.currentEmail = '';
         _this2.currentTeacher = '';
       });
-    },
-    refreshPage: function refreshPage(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      location.reload();
     }
   }
 }, _defineProperty(_ref, "computed", {}), _defineProperty(_ref, "mounted", function mounted() {

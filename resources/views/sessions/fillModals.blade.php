@@ -11,8 +11,8 @@
     <div class="showmail">
         <input type="checkbox" name="showmail" id="showmail" class="sr-only showmail__checkbox">
         <label for="showmail" class="showmail__label">
-            <span class="showmail__on">Afficher l'email</span>
-            <span class="showmail__off">Masquer l'email</span>
+            <span class="showmail__on">Afficher l'email de la session</span>
+            <span class="showmail__off">Masquer l'email de la session</span>
             <span class="showmail__icon"></span>
         </label>
         <div class="mail">
@@ -104,10 +104,20 @@
                 <div class="form-group">
                     <label for="courseName">Intitulé EXACT du cours</label>
                     <input type="text" class="form-control" id="courseName" name="name" placeholder="Le nom du cours ici" value="{{old('courseName') ? old('courseName') : ($lastModal ? $lastModal->name : '')}}">
+                    @if ($errors->has('name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Intitulé du cours" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="group">Groupe (Liste complète des groupe concernés)</label>
                     <input type="text" class="form-control" id="group" name="group" placeholder="le(s) groupe(s) ici" value="{{old('group') ? old('group') : ($lastModal? $lastModal->group : '')}}">
+                    @if ($errors->has('group'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Groupe" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="groupInfos">Information supplémentaire sur les groupes</label>
@@ -127,10 +137,20 @@
                 <div class="form-group">
                     <label for="local">Locaux possibles</label>
                     <input type="text" class="form-control" id="local" name="local" placeholder="Le(s) local ici" value="{{$lastModal? $lastModal->local : ''}}">
+                    @if ($errors->has('local'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "Locaux possibles" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="supervisor">Surveillants souhaités</label>
                     <input type="text" class="form-control" id="supervisor" name="supervisor" placeholder="Le(s) surveillant(s) ici" value="{{old('supervisor') ? old('supervisor') : ($lastModal? $lastModal->supervisor : '')}}">
+                    @if ($errors->has('supervisor'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>Le champs "surveillants" est obligatoire</strong>
+                        </span>
+                    @endif
                 </div>
 
                 <div class="form-group">

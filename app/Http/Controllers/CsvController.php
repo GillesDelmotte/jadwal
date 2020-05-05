@@ -12,19 +12,19 @@ class CsvController extends Controller
     {
         $session = $request->session()->get('session');
 
-        $toto = fopen($request->file, 'r');
+        $csv = fopen($request->file, 'r');
 
         $row = 1;
         $arr = [];
 
-        while (($data = fgetcsv($toto, 1000, ",")) !== FALSE) {
+        while (($data = fgetcsv($csv, 1000, ",")) !== FALSE) {
             $num = count($data);
             $row++;
             for ($c = 0; $c < $num; $c++) {
                 $arr[] = $data[$c];
             }
         }
-        fclose($toto);
+        fclose($csv);
 
         $objects = [];
         $keys = [];
@@ -62,8 +62,5 @@ class CsvController extends Controller
         }
 
         return back();
-    }
-    public function index(){
-        var_dump('ok'); die();
     }
 }
