@@ -32361,6 +32361,7 @@ var app = new Vue((_ref = {
     fakeList: [],
     currentTeacher: null,
     currentEmail: null,
+    buttonOk: false,
     dropzoneOptions: {
       url: '/csv',
       thumbnailWidth: 150,
@@ -32428,6 +32429,11 @@ var app = new Vue((_ref = {
         _this2.currentEmail = '';
         _this2.currentTeacher = '';
       });
+    },
+    refreshPage: function refreshPage(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      location.reload();
     }
   }
 }, _defineProperty(_ref, "computed", {}), _defineProperty(_ref, "mounted", function mounted() {

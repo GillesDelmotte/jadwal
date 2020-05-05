@@ -23,7 +23,7 @@
                         <small class="form-text text-muted">Votre fichier csv doit comporté une colonne 'nom' et une colonne 'email'</small>
                     </div>
                 </div>
-                <button v-if="!check" type="submit" class="sendButton" >Envoyer le fichier</button>
+                <button type="submit" class="sendButton">Envoyer le fichier</button>
             </form>
         </div>
         <div>

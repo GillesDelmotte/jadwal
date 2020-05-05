@@ -38,6 +38,7 @@ const app = new Vue({
         fakeList: [],
         currentTeacher: null,
         currentEmail: null,
+        buttonOk: false,
         dropzoneOptions: {
             url: '/csv',
             thumbnailWidth: 150,
@@ -87,6 +88,11 @@ const app = new Vue({
                     this.currentEmail = '';
                     this.currentTeacher = '';
                 })
+        },
+        refreshPage(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            location.reload();
         }
     },
     computed: {
